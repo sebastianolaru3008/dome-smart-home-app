@@ -1,4 +1,4 @@
-import 'package:dome_smart_home_app/features/example/domain/example_entity.dart';
+import 'package:dome_smart_home_app/src/features/example/domain/example_entity.dart';
 import 'package:flutter/material.dart';
 
 class ExampleWidget extends StatelessWidget {

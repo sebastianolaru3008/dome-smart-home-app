@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:dome_smart_home_app/features/example/domain/example_entity.dart';
-import 'package:dome_smart_home_app/features/example/services/api/example_service.dart';
+import 'package:dome_smart_home_app/src/features/example/domain/example_entity.dart';
+import 'package:dome_smart_home_app/src/features/example/services/api/example_service.dart';
 import 'package:equatable/equatable.dart';
 
 part 'example_event.dart';

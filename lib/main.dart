@@ -1,5 +1,5 @@
-import 'package:dome_smart_home_app/common/locator/service_locator.dart';
-import 'package:dome_smart_home_app/features/example/presentation/example.dart';
+import 'package:dome_smart_home_app/src/common/locator/service_locator.dart';
+import 'package:dome_smart_home_app/src/features/example/presentation/example.dart';
 import 'package:flutter/material.dart';
 
 void main() {

@@ -1,5 +1,5 @@
-import 'package:dome_smart_home_app/features/example/presentation/bloc/example_bloc.dart';
-import 'package:dome_smart_home_app/features/example/presentation/ui/widgets/example_widget.dart';
+import 'package:dome_smart_home_app/src/features/example/presentation/bloc/example_bloc.dart';
+import 'package:dome_smart_home_app/src/features/example/presentation/ui/widgets/example_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
