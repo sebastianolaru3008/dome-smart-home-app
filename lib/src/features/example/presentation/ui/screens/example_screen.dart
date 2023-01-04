@@ -19,8 +19,8 @@ class ExampleScreen extends StatelessWidget {
               exampleEntity: state.exampleEntity,
             );
           }
-          return const Center(
-            child: Text("Press the button to fetch data"),
+          return Center(
+            child: Image.asset("assets/images/loading.gif", height: 48.0, width: 48.0),
           );
         },
       ),

@@ -10,7 +10,7 @@ class ExampleBloc extends Bloc<ExampleEvent, ExampleState> {
   ExampleBloc({
     required this.exampleService,
   }) : super(ExampleInitial()) {
-    on<ExampleEvent>(_onExampleEvent);
+    on<ExampleButtonPressed>(_onExampleEvent);
   }
 
   final ExampleService exampleService;
