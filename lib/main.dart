@@ -1,5 +1,5 @@
 import 'package:dome_smart_home_app/src/common/locator/service_locator.dart';
-import 'package:dome_smart_home_app/src/features/authenticate/presentation/authenticate.dart';
+import 'package:dome_smart_home_app/src/features/example/presentation/example.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class DomeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Flutter Demo',
-      home: Authenticate(),
+      home: Example(),
     );
   }
 }
