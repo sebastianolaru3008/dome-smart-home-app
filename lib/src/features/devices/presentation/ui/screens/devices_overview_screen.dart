@@ -12,7 +12,14 @@ class DevicesOverviewScreen extends StatelessWidget {
       body: BlocBuilder<DevicesBloc, DevicesState>(
         builder: (context, state) {
           if (state is DevicesInitial) {
-            return const DevicesOverview();
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (state is DevicesLoaded) {
+            return DevicesOverview(
+              devices: state.devices,
+            );
           }
 
           return const SizedBox();

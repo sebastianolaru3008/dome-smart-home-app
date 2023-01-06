@@ -1,15 +1,44 @@
 import 'package:flutter/material.dart';
 
+import '../../../domain/device_entity.dart';
+import 'device_card_widget.dart';
+
 class DevicesList extends StatelessWidget {
-  const DevicesList({Key? key}) : super(key: key);
+  final List<DeviceEntity> devices;
+
+  const DevicesList({
+    Key? key,
+    required this.devices,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
-        Text('Device1'),
-        Text('Device2'),
-        Text('Device3'),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'My devices',
+              style: TextStyle(
+                fontSize: 24,
+                color: Colors.black38,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: GridView(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 0.8,
+            ),
+            children:
+                devices.map((device) => DeviceCard(device: device)).toList(),
+          ),
+        ),
       ],
     );
   }
