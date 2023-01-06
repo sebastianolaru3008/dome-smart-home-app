@@ -53,9 +53,11 @@ class RegisterWidget extends StatelessWidget {
                         obscureText: true),
                     SizedBox(height: 15),
                     InputWidget(
-                        placeholderText: 'Repeat password',
-                        icon: Icons.lock_outline,
-                        obscureText: true),
+                      placeholderText: 'Repeat password',
+                      icon: Icons.lock_outline,
+                      obscureText: true,
+                      showDone: true,
+                    ),
                   ],
                 ),
               ),
@@ -64,9 +66,7 @@ class RegisterWidget extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  context
-                      .read<AuthenticationBloc>()
-                      .add(RegisterButtonPressedInRegisterPage());
+                  context.read<AuthenticationBloc>().add(AuthenticateUser());
                 },
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(

@@ -40,9 +40,11 @@ class LoginWidget extends StatelessWidget {
                       icon: Icons.mail_outline),
                   SizedBox(height: 20),
                   InputWidget(
-                      placeholderText: 'Password',
-                      icon: Icons.lock_outline,
-                      obscureText: true),
+                    placeholderText: 'Password',
+                    icon: Icons.lock_outline,
+                    obscureText: true,
+                    showDone: true,
+                  ),
                 ],
               ),
             ),
@@ -67,7 +69,7 @@ class LoginWidget extends StatelessWidget {
             const Padding(padding: EdgeInsets.all(8.0)),
             ElevatedButton(
               onPressed: () {
-                context.read<AuthenticationBloc>().add(LoginButtonPressed());
+                context.read<AuthenticationBloc>().add(AuthenticateUser());
               },
               style: ElevatedButton.styleFrom(
                 textStyle: const TextStyle(

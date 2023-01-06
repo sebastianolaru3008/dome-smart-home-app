@@ -7,16 +7,13 @@ import 'authentication_state.dart';
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc({required AuthenticationService authenticationService}) : super(AuthenticationInitial()) {
-    on<RegisterButtonPressed>((event, emit) {
+    on<RegisterButtonPressed>((_, emit) {
       emit(AuthenticationRegister());
     });
-    on<LoginButtonPressed>((event, emit) {
+    on<AuthenticateUser>((_, emit) {
       emit(AuthenticationSucceed());
     });
-    on<RegisterButtonPressedInRegisterPage>((event, emit) {
-      emit(AuthenticationSucceed());
-    });
-    on<GoToLoginPage>((event, emit) {
+    on<GoToLoginPage>((_, emit) {
       emit(AuthenticationInitial());
     });
   }

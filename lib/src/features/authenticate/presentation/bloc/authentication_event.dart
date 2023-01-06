@@ -7,6 +7,5 @@ abstract class AuthenticationEvent extends Equatable {
 }
 
 class RegisterButtonPressed extends AuthenticationEvent {}
-class RegisterButtonPressedInRegisterPage extends AuthenticationEvent {}
-class LoginButtonPressed extends AuthenticationEvent {}
+class AuthenticateUser extends AuthenticationEvent {}
 class GoToLoginPage extends AuthenticationEvent {}

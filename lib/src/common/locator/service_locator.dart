@@ -8,9 +8,13 @@ GetIt locator = GetIt.instance;
 
 void registerServices() {
   _registerExampleService();
+  _registerAuthenticationService();
 }
 
 void _registerExampleService() {
   locator.registerLazySingleton<ExampleService>(() => ExampleServiceImpl());
+}
+
+void _registerAuthenticationService() {
   locator.registerLazySingleton<AuthenticationService>(() => AuthenticationServiceImpl());
 }

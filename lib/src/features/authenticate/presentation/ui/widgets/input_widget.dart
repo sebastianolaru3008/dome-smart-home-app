@@ -5,12 +5,14 @@ class InputWidget extends StatelessWidget {
       {Key? key,
       required this.placeholderText,
       this.obscureText = false,
-      required this.icon})
+      required this.icon,
+      this.showDone = false})
       : super(key: key);
 
   final String placeholderText;
   final bool obscureText;
   final IconData icon;
+  final bool showDone;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,7 @@ class InputWidget extends StatelessWidget {
       color: Colors.transparent,
       child: TextFormField(
         obscureText: obscureText,
+        textInputAction: showDone ? TextInputAction.done : TextInputAction.next,
         decoration: InputDecoration(
           hintText: placeholderText,
           suffixIcon: Icon(
