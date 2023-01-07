@@ -1,20 +1,19 @@
 part of 'users_list_bloc.dart';
 
-@immutable
-abstract class UsersListEvent extends Equatable{
+abstract class UsersListEvent extends Equatable {
   const UsersListEvent();
+
   @override
   List<Object?> get props => [];
 }
 
-class RemoveUserButtonPressed extends UsersListEvent {
+class RemoveUserEvent extends UsersListEvent {
+  const RemoveUserEvent({required this.userEntity});
+
+  final UserEntity userEntity;
+
+  @override
+  List<Object?> get props => [userEntity];
 }
 
-class CancelButtonPressed extends UsersListEvent {
-}
-
-class OpenDialog extends UsersListEvent {
-  final UserEntity user;
-  final BuildContext dialogContext;
-  OpenDialog(this.user, this.dialogContext);
-}
+class LoadUsersListEvent extends UsersListEvent {}

@@ -13,7 +13,7 @@ class UsersList extends StatelessWidget {
     return BlocProvider(
       create: (context) => UsersListBloc(
         usersListService: locator.get<UsersListService>(),
-      ),
+      )..add(LoadUsersListEvent()),
       child: UsersListScreen(),
     );
   }
