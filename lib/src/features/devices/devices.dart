@@ -1,4 +1,4 @@
-import 'package:dome_smart_home_app/src/features/devices/presentation/bloc/devices_bloc.dart';
+import 'package:dome_smart_home_app/src/features/devices/presentation/bloc/devices/devices_bloc.dart';
 import 'package:dome_smart_home_app/src/features/devices/presentation/ui/screens/devices_overview_screen.dart';
 import 'package:dome_smart_home_app/src/features/devices/services/api/devices_service.dart';
 import 'package:flutter/material.dart';
