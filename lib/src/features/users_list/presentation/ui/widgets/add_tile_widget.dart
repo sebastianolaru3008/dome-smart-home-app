@@ -2,6 +2,8 @@ import 'package:dome_smart_home_app/src/features/example/presentation/example.da
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/add_user_screen.dart';
+
 class AddTileWidget extends StatelessWidget {
   const AddTileWidget({Key? key}) : super(key: key);
 
@@ -12,7 +14,7 @@ class AddTileWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const Example();
+            return DropdownDemo();
           }));
         },
         child: DottedBorder(

@@ -17,3 +17,13 @@ class RemoveUserEvent extends UsersListEvent {
 }
 
 class LoadUsersListEvent extends UsersListEvent {}
+
+class AddUserEvent extends UsersListEvent {
+  const AddUserEvent({required this.email, required this.role});
+
+  final String email;
+  final String role;
+
+  @override
+  List<Object?> get props => [email,role];
+}
