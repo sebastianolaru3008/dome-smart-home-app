@@ -1,4 +1,4 @@
-import 'package:dome_smart_home_app/src/features/example/presentation/example.dart';
+import 'package:dome_smart_home_app/src/features/devices/devices.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,7 +23,7 @@ class AuthenticationScreen extends StatelessWidget {
             return const RegisterWidget();
           }
           if (state is AuthenticationSucceed) {
-            return const Example();
+            return const Devices();
           }
 
           return const SizedBox();
