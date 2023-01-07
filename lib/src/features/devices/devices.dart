@@ -14,7 +14,7 @@ class Devices extends StatelessWidget {
     return BlocProvider(
       create: (context) => DevicesBloc(
         devicesService: locator.get<DevicesService>(),
-      ),
+      )..add(LoadDevices()),
       child: const DevicesOverviewScreen(),
     );
   }

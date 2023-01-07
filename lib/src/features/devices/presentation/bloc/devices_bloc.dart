@@ -10,14 +10,15 @@ part 'devices_event.dart';
 part 'devices_state.dart';
 
 class DevicesBloc extends Bloc<DevicesEvent, DevicesState> {
-  DevicesBloc({required DevicesService devicesService})
-      : super(DevicesInitial()) {
+  final DevicesService devicesService;
 
-    on<LoadDevices>((event, emit) async {
-      await devicesService
-          .getDevices()
-          .then((value) => emit(DevicesLoaded(devices: value)));
-    });
-    add(LoadDevices());
+  DevicesBloc({required this.devicesService}) : super(DevicesInitial()) {
+    on<LoadDevices>(_loadDevices);
+  }
+
+  _loadDevices(_, Emitter<DevicesState> emit) async {
+    await devicesService
+        .getDevices()
+        .then((value) => emit(DevicesLoaded(devices: value)));
   }
 }
