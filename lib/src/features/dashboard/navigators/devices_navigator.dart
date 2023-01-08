@@ -18,6 +18,7 @@ class DeviceNavigator extends StatelessWidget {
             return CustomPageRouteBuilder(
                 screen: const DevicesOverviewScreen());
         }
+        return null;
       },
     );
   }
