@@ -1,6 +1,6 @@
-import 'package:dome_smart_home_app/src/features/dashboard/navigators/devices_navigator.dart';
-import 'package:dome_smart_home_app/src/features/dashboard/navigators/family_navigator.dart';
 import 'package:dome_smart_home_app/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'package:dome_smart_home_app/src/features/devices/devices.dart';
+import 'package:dome_smart_home_app/src/features/users_list/presentation/users_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,8 +39,8 @@ class _DashboardUIState extends State<DashboardUI>
       body: TabBarView(
         controller: tabController,
         children: const [
-          DeviceNavigator(),
-          FamilyNavigator(),
+          Devices(),
+          UsersList(),
         ],
       ),
       bottomNavigationBar: BlocBuilder<DashboardBloc, DashboardState>(

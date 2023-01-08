@@ -1,6 +1,4 @@
 import 'package:dome_smart_home_app/src/features/users_list/presentation/bloc/users_list_bloc.dart';
-import 'package:dome_smart_home_app/src/features/users_list/presentation/ui/widgets/add_tile_widget.dart';
-import 'package:dome_smart_home_app/src/features/users_list/presentation/ui/widgets/user_tile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,19 +6,20 @@ import '../../../../authenticate/presentation/ui/widgets/input_widget.dart';
 
 class DropdownDemo extends StatefulWidget {
   const DropdownDemo({Key? key}) : super(key: key);
+
   @override
   State<DropdownDemo> createState() => AddUserScreen();
 }
 
 class AddUserScreen extends State<DropdownDemo> {
-   //AddUserScreen({Key? key}) : super();
+  //AddUserScreen({Key? key}) : super();
 
-   String dropdownValue = 'Parent';
+  String dropdownValue = 'Parent';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    body: Container(
+        body: Container(
       constraints: const BoxConstraints.expand(),
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -39,13 +38,15 @@ class AddUserScreen extends State<DropdownDemo> {
             ),
             const Text(
               'Add your family member',
-              style: TextStyle(fontSize: 38, fontWeight: FontWeight.bold,
+              style: TextStyle(
+                fontSize: 38,
+                fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 30),
             Form(
               child: Column(
-                children:  [
+                children: [
                   const InputWidget(
                       placeholderText: 'Email address',
                       icon: Icons.mail_outline),
@@ -55,7 +56,7 @@ class AddUserScreen extends State<DropdownDemo> {
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(
                         borderSide: BorderSide.none,
-                        borderRadius:  BorderRadius.all(Radius.circular(10)),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                       filled: true,
                       fillColor: Colors.white,
@@ -78,7 +79,9 @@ class AddUserScreen extends State<DropdownDemo> {
             const Padding(padding: EdgeInsets.all(8.0)),
             ElevatedButton(
               onPressed: () {
-                context.read<UsersListBloc>().add(AddUserEvent(email:"oana@gmail.com", role: dropdownValue));
+                context.read<UsersListBloc>().add(
+                    AddUserEvent(email: "oana@gmail.com", role: dropdownValue));
+                Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
                 textStyle: const TextStyle(
@@ -94,12 +97,12 @@ class AddUserScreen extends State<DropdownDemo> {
           ],
         ),
       ),
-    )
-    );
+    ));
   }
 }
-List<DropdownMenuItem<String>> get dropdownItems{
-  List<DropdownMenuItem<String>> roles =const [
+
+List<DropdownMenuItem<String>> get dropdownItems {
+  List<DropdownMenuItem<String>> roles = const [
     DropdownMenuItem(value: "Parent", child: Text("Parent")),
     DropdownMenuItem(value: "Grandparent", child: Text("Grandparent")),
     DropdownMenuItem(value: "Kid", child: Text("Kid")),

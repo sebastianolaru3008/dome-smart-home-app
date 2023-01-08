@@ -27,13 +27,13 @@ class UserTileWidget extends StatelessWidget {
                 textEmptyButton: "No, cancel",
                 textFullButton: "Yes, delete",
                 onCancelCallback: () {
-                  Navigator.pop(context);
+                  Navigator.pop(childContext);
                 },
                 onFullCallback: () {
                   context
                       .read<UsersListBloc>()
                       .add(RemoveUserEvent(userEntity: userEntity));
-                  Navigator.pop(context);
+                  Navigator.pop(childContext);
                 },
               );
             },
@@ -41,7 +41,8 @@ class UserTileWidget extends StatelessWidget {
         },
         child: ListTile(
           leading: CircleAvatar(
-            backgroundImage: AssetImage("assets/images/users/${userEntity.name}.png"),
+            backgroundImage:
+                AssetImage("assets/images/users/${userEntity.name}.png"),
             radius: 30,
           ),
           title: Text(userEntity.name,
