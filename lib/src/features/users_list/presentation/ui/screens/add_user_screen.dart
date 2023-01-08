@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../authenticate/presentation/ui/widgets/input_widget.dart';
+import '../../../domain/user_entity.dart';
 
 class DropdownDemo extends StatefulWidget {
   const DropdownDemo({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class DropdownDemo extends StatefulWidget {
 class AddUserScreen extends State<DropdownDemo> {
   //AddUserScreen({Key? key}) : super();
 
-  String dropdownValue = 'Parent';
+  Role dropdownValue = Role.parent;
   String email ='';
 
   @override
@@ -69,7 +70,7 @@ class AddUserScreen extends State<DropdownDemo> {
                     value: dropdownValue,
                     items: dropdownItems,
                     dropdownColor: Colors.white,
-                    onChanged: (String? newValue) {
+                    onChanged: (Role? newValue) {
                       setState(() {
                         dropdownValue = newValue!;
                       });
@@ -106,12 +107,12 @@ class AddUserScreen extends State<DropdownDemo> {
   }
 }
 
-List<DropdownMenuItem<String>> get dropdownItems {
-  List<DropdownMenuItem<String>> roles = const [
-    DropdownMenuItem(value: "Parent", child: Text("Parent")),
-    DropdownMenuItem(value: "Grandparent", child: Text("Grandparent")),
-    DropdownMenuItem(value: "Kid", child: Text("Kid")),
-    DropdownMenuItem(value: "Other", child: Text("Other")),
+List<DropdownMenuItem<Role>> get dropdownItems {
+  List<DropdownMenuItem<Role>> roles =  [
+    DropdownMenuItem(value: Role.parent, child: Text(Role.parent.toSentenceCaseString())),
+    DropdownMenuItem(value: Role.grandparent, child: Text(Role.grandparent.toSentenceCaseString())),
+    DropdownMenuItem(value: Role.kid, child: Text(Role.kid.toSentenceCaseString())),
+    DropdownMenuItem(value: Role.other, child: Text(Role.other.toSentenceCaseString())),
   ];
   return roles;
 }

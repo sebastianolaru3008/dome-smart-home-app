@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dome_smart_home_app/src/features/authenticate/services/api/authentication_service.dart';
 
+import '../../../users_list/domain/user_entity.dart';
 import 'authentication_event.dart';
 import 'authentication_state.dart';
 
@@ -11,7 +12,7 @@ class AuthenticationBloc
       emit(AuthenticationRegister());
     });
     on<AuthenticateUser>((_, emit) {
-      emit(AuthenticationSucceed());
+      emit(const AuthenticationSucceed(role: Role.parent));
     });
     on<GoToLoginPage>((_, emit) {
       emit(AuthenticationInitial());
