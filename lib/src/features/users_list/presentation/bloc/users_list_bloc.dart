@@ -30,7 +30,6 @@ class UsersListBloc extends Bloc<UsersListEvent, UsersListState> {
   }
 
   _onRemoveUser(RemoveUserEvent event, Emitter<UsersListState> emit) {
-    // print(state);
     usersListService.deleteFamilyMember(event.userEntity);
     emit(
       UsersListLoaded(
@@ -38,15 +37,13 @@ class UsersListBloc extends Bloc<UsersListEvent, UsersListState> {
         usersList: usersListService.familyMembers,
       ),
     );
-    // print(state);
   }
 
   _onAddUser(AddUserEvent event, Emitter<UsersListState> emit) {
-    // print(state);
     List<UserEntity> allUsers = authenticationService.allUsers;
     for(var user in allUsers){
       if(user.email == event.email){
-        //user.role = event.role;
+        user.role = event.role;
         usersListService.familyMembers.add(user);
       }
     }
@@ -56,6 +53,5 @@ class UsersListBloc extends Bloc<UsersListEvent, UsersListState> {
         usersList: usersListService.familyMembers,
       ),
     );
-    // print(state);
   }
 }

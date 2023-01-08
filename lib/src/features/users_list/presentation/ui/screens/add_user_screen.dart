@@ -15,6 +15,7 @@ class AddUserScreen extends State<DropdownDemo> {
   //AddUserScreen({Key? key}) : super();
 
   String dropdownValue = 'Parent';
+  String email ='';
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +48,13 @@ class AddUserScreen extends State<DropdownDemo> {
             Form(
               child: Column(
                 children: [
-                  const InputWidget(
+                   InputWidget(
                       placeholderText: 'Email address',
-                      icon: Icons.mail_outline),
+                      icon: Icons.mail_outline,
+                    getText: (text){
+                       email = text;
+                    },
+                  ),
                   const SizedBox(height: 20),
                   DropdownButtonFormField(
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -80,7 +85,7 @@ class AddUserScreen extends State<DropdownDemo> {
             ElevatedButton(
               onPressed: () {
                 context.read<UsersListBloc>().add(
-                    AddUserEvent(email: "oana@gmail.com", role: dropdownValue));
+                    AddUserEvent(email:email, role: dropdownValue));
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(

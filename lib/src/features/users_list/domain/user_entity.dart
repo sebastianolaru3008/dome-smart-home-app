@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class UserEntity extends Equatable {
-  const UserEntity({
+   UserEntity({
     required this.name,
     required this.email,
     required this.password,
@@ -11,7 +11,7 @@ class UserEntity extends Equatable {
   final String name;
   final String email;
   final String password;
-  final String role;
+  late String role;
 
   @override
   List<Object?> get props => [name, role];

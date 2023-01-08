@@ -34,16 +34,18 @@ class LoginWidget extends StatelessWidget {
             const SizedBox(height: 30),
             Form(
               child: Column(
-                children: const [
+                children:  [
                   InputWidget(
                       placeholderText: 'Email address',
-                      icon: Icons.mail_outline),
+                      icon: Icons.mail_outline,
+                  getText: (text){}),
                   SizedBox(height: 20),
                   InputWidget(
                     placeholderText: 'Password',
                     icon: Icons.lock_outline,
                     obscureText: true,
                     showDone: true,
+                      getText: (text){}
                   ),
                 ],
               ),
