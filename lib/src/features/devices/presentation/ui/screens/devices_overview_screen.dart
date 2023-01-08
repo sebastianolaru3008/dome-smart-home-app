@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DevicesOverviewScreen extends StatelessWidget {
-  const DevicesOverviewScreen({Key? key}) : super(key: key);
+  const DevicesOverviewScreen({Key? key, required this.navKey}) : super(key: key);
+
+  final GlobalKey<NavigatorState> navKey;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,7 @@ class DevicesOverviewScreen extends StatelessWidget {
           if (state is DevicesLoaded) {
             return DevicesOverview(
               devices: state.devices,
+              navKey: navKey,
             );
           }
 

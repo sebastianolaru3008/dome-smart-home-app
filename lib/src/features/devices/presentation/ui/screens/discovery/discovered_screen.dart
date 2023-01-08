@@ -8,7 +8,9 @@ import '../../../../../../common/locator/service_locator.dart';
 import '../../../../services/api/devices_service.dart';
 
 class DiscoveredScreen extends StatelessWidget {
-  const DiscoveredScreen({Key? key}) : super(key: key);
+  const DiscoveredScreen({Key? key, required this.navKey}) : super(key: key);
+
+  final GlobalKey<NavigatorState> navKey;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,8 @@ class DiscoveredScreen extends StatelessWidget {
                       ),
                       Expanded(
                           child: NewDevicesList(
-                        new_devices: state.devices,
+                        newDevices: state.devices,
+                        navKey: navKey,
                       )),
                       const SizedBox(
                         height: 20,
@@ -55,7 +58,7 @@ class DiscoveredScreen extends StatelessWidget {
                       ElevatedButton(
                         onPressed: () => context
                             .read<DevicesBloc>()
-                            .add(GoToScanningScreen(context)),
+                            .add(GoToScanningScreen(navKey)),
                         style: ElevatedButton.styleFrom(
                           textStyle: const TextStyle(
                             fontSize: 20,

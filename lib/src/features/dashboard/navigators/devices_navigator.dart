@@ -16,7 +16,7 @@ class DeviceNavigator extends StatelessWidget {
         switch (settings.name) {
           case Routes.rootNavigator:
             return CustomPageRouteBuilder(
-                screen: const DevicesOverviewScreen());
+                screen: DevicesOverviewScreen(navKey: devicesNavigatorKey));
         }
       },
     );

@@ -34,7 +34,8 @@ class DevicesBloc extends Bloc<DevicesEvent, DevicesState> {
 
   _goToScanningScreen(GoToScanningScreen event,
       Emitter<DevicesState> emit) async {
-    Navigator.of(event.context).push(
+
+    event.navKey.currentState?.push(
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
         const ScanningScreen(),
@@ -55,16 +56,16 @@ class DevicesBloc extends Bloc<DevicesEvent, DevicesState> {
     );
     // wait 3 seconds before loading devices
     await Future.delayed(const Duration(seconds: 3), () {
-      add(GoToDiscoveredDevicesScreen(event.context));
+      add(GoToDiscoveredDevicesScreen(event.navKey));
     });
   }
 
   _goToDiscoveredDevicesScreen(GoToDiscoveredDevicesScreen event,
       Emitter<DevicesState> emit) {
-    Navigator.of(event.context).push(
+    event.navKey.currentState?.push(
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-        const DiscoveredScreen(),
+         DiscoveredScreen(navKey: event.navKey),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(1.0, 0.0);
           const end = Offset.zero;

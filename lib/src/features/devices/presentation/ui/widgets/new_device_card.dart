@@ -7,7 +7,9 @@ import '../../../domain/device_entity.dart';
 class NewDeviceCard extends StatelessWidget {
   final DeviceEntity device;
 
-  const NewDeviceCard({Key? key, required this.device}) : super(key: key);
+  const NewDeviceCard({Key? key, required this.device, required this.navKey}) : super(key: key);
+
+  final GlobalKey<NavigatorState> navKey;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class NewDeviceCard extends StatelessWidget {
       ),
       child: GestureDetector(
         onTap: () {
-          context.read<NewDevicesBloc>().add(AddNewDevice(context: context, device: device));
+          context.read<NewDevicesBloc>().add(AddNewDevice(navKey: navKey, device: device));
         },
         child: Card(
           margin: const EdgeInsets.all(8),

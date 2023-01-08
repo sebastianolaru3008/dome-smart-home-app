@@ -10,13 +10,13 @@ abstract class DevicesEvent extends Equatable {
 class LoadDevices extends DevicesEvent {}
 
 class GoToScanningScreen extends DevicesEvent {
-  final BuildContext context;
+  final GlobalKey<NavigatorState> navKey;
 
-  GoToScanningScreen(this.context);
+  const GoToScanningScreen(this.navKey);
 }
 
 class GoToDiscoveredDevicesScreen extends DevicesEvent {
-  final BuildContext context;
+  final GlobalKey<NavigatorState> navKey;
 
-  GoToDiscoveredDevicesScreen(this.context);
+  const GoToDiscoveredDevicesScreen(this.navKey);
 }

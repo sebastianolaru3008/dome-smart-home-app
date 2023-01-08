@@ -10,9 +10,9 @@ abstract class NewDevicesEvent extends Equatable {
 class LoadNewDevices extends NewDevicesEvent {}
 class AddNewDevice extends NewDevicesEvent {
   final DeviceEntity device;
-  final BuildContext context;
+  final GlobalKey<NavigatorState> navKey;
 
-  const AddNewDevice({required this.device, required this.context});
+  const AddNewDevice({required this.device, required this.navKey});
 
   @override
   List<Object?> get props => [device];

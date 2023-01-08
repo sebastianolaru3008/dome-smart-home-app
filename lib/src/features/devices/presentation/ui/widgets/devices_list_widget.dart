@@ -9,8 +9,10 @@ class DevicesList extends StatelessWidget {
 
   const DevicesList({
     Key? key,
-    required this.devices,
+    required this.devices, required this.navKey,
   }) : super(key: key);
+
+  final GlobalKey<NavigatorState> navKey;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class DevicesList extends StatelessWidget {
             ),
             children: [
               ...devices.map((device) => DeviceCard(device: device)).toList(),
-              AddDeviceCard(),
+              AddDeviceCard(navKey: navKey),
             ],
           ),
         ),

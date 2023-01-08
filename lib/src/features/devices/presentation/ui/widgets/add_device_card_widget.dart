@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddDeviceCard extends StatelessWidget {
-  const AddDeviceCard({Key? key}) : super(key: key);
+  const AddDeviceCard({Key? key, required this.navKey}) : super(key: key);
+
+  final GlobalKey<NavigatorState> navKey;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class AddDeviceCard extends StatelessWidget {
         radius: const Radius.circular(10),
         child: GestureDetector(
           onTap: () =>
-              context.read<DevicesBloc>().add(GoToScanningScreen(context)),
+              context.read<DevicesBloc>().add(GoToScanningScreen(navKey)),
           child: Card(
             margin: const EdgeInsets.all(8),
             color: Colors.transparent,
