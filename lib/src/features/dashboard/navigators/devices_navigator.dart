@@ -31,6 +31,7 @@ class DeviceNavigator extends StatelessWidget {
         if (state is DevicesDiscovered) {
           devicesNavigatorKey.currentState?.pushNamed(Routes.devicesDiscovery);
         }
+        return null;
       },
       child: Navigator(
         key: devicesNavigatorKey,

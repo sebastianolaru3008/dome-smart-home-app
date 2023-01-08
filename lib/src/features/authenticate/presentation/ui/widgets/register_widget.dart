@@ -39,24 +39,27 @@ class RegisterWidget extends StatelessWidget {
               const SizedBox(height: 40),
               Form(
                 child: Column(
-                  children: const [
+                  children:  [
                     InputWidget(
-                        placeholderText: 'Name', icon: Icons.person_outline),
+                        placeholderText: 'Name', icon: Icons.person_outline,getText: (text){}),
                     SizedBox(height: 15),
                     InputWidget(
                         placeholderText: 'Email address',
-                        icon: Icons.mail_outline),
+                        icon: Icons.mail_outline,
+                        getText: (text){}),
                     SizedBox(height: 15),
                     InputWidget(
                         placeholderText: 'Password',
                         icon: Icons.lock_outline,
-                        obscureText: true),
+                        obscureText: true,
+                        getText: (text){}),
                     SizedBox(height: 15),
                     InputWidget(
                       placeholderText: 'Repeat password',
                       icon: Icons.lock_outline,
                       obscureText: true,
                       showDone: true,
+                        getText: (text){}
                     ),
                   ],
                 ),
