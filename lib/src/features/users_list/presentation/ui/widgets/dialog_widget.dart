@@ -28,11 +28,15 @@ class DialogWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 40),
           child: Column(
             children: [
-              Text(dialogTitle,
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey.shade600)),
+              Text(
+                dialogTitle,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey.shade600,
+                ),
+              ),
               const Spacer(),
               Row(
                 children: [

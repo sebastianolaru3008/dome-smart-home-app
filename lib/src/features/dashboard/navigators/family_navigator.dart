@@ -1,5 +1,6 @@
 import 'package:dome_smart_home_app/src/common/navigation/custom_page_router.dart';
 import 'package:dome_smart_home_app/src/common/navigation/routes.dart';
+import 'package:dome_smart_home_app/src/features/users_list/presentation/ui/screens/add_user_screen.dart';
 import 'package:dome_smart_home_app/src/features/users_list/presentation/ui/screens/users_list_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,8 @@ class UsersListNavigator extends StatelessWidget {
         switch (settings.name) {
           case Routes.rootNavigator:
             return CustomPageRouteBuilder(screen: const UsersListScreen());
+          case Routes.userAdd:
+            return CustomPageRouteBuilder(screen: const DropdownDemo());
         }
       },
     );
