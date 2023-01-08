@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../domain/device_entity.dart';
+import 'add_device_card_widget.dart';
 import 'device_card_widget.dart';
 
 class DevicesList extends StatelessWidget {
@@ -35,8 +36,10 @@ class DevicesList extends StatelessWidget {
               crossAxisCount: 2,
               childAspectRatio: 0.8,
             ),
-            children:
-                devices.map((device) => DeviceCard(device: device)).toList(),
+            children: [
+              ...devices.map((device) => DeviceCard(device: device)).toList(),
+              AddDeviceCard(),
+            ],
           ),
         ),
       ],
