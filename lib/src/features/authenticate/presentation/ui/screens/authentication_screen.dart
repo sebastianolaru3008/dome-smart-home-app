@@ -1,11 +1,10 @@
-import 'package:dome_smart_home_app/src/features/users_list/presentation/users_list.dart';
+import 'package:dome_smart_home_app/src/features/authenticate/presentation/bloc/authentication_bloc.dart';
+import 'package:dome_smart_home_app/src/features/authenticate/presentation/bloc/authentication_state.dart';
+import 'package:dome_smart_home_app/src/features/authenticate/presentation/ui/widgets/login_widget.dart';
+import 'package:dome_smart_home_app/src/features/authenticate/presentation/ui/widgets/register_widget.dart';
+import 'package:dome_smart_home_app/src/features/dashboard/presentation/ui/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../bloc/authentication_bloc.dart';
-import '../../bloc/authentication_state.dart';
-import '../widgets/login_widget.dart';
-import '../widgets/register_widget.dart';
 
 class AuthenticationScreen extends StatelessWidget {
   const AuthenticationScreen({Key? key}) : super(key: key);
@@ -23,7 +22,7 @@ class AuthenticationScreen extends StatelessWidget {
             return const RegisterWidget();
           }
           if (state is AuthenticationSucceed) {
-            return const UsersList();
+            return const Dashboard();
           }
 
           return const SizedBox();
