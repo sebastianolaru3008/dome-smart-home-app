@@ -42,7 +42,7 @@ class _DashboardUIState extends State<DashboardUI>
         controller: tabController,
         children: const [
           Devices(),
-          FamilyNavigator(),
+          UsersList(),
         ],
       ),
       bottomNavigationBar: BlocBuilder<DashboardBloc, DashboardState>(
