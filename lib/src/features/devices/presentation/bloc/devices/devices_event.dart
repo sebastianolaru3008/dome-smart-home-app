@@ -9,14 +9,6 @@ abstract class DevicesEvent extends Equatable {
 
 class LoadDevices extends DevicesEvent {}
 
-class GoToScanningScreen extends DevicesEvent {
-  final GlobalKey<NavigatorState> navKey;
+class GoToScanningScreen extends DevicesEvent {}
 
-  const GoToScanningScreen(this.navKey);
-}
-
-class GoToDiscoveredDevicesScreen extends DevicesEvent {
-  final GlobalKey<NavigatorState> navKey;
-
-  const GoToDiscoveredDevicesScreen(this.navKey);
-}
+class GoToDiscoveredDevicesScreen extends DevicesEvent {}

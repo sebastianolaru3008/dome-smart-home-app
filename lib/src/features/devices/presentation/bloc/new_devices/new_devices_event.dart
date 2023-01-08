@@ -8,11 +8,11 @@ abstract class NewDevicesEvent extends Equatable {
 }
 
 class LoadNewDevices extends NewDevicesEvent {}
-class AddNewDevice extends NewDevicesEvent {
-  final DeviceEntity device;
-  final GlobalKey<NavigatorState> navKey;
 
-  const AddNewDevice({required this.device, required this.navKey});
+class AddNewDevice extends NewDevicesEvent {
+  const AddNewDevice({required this.device});
+
+  final DeviceEntity device;
 
   @override
   List<Object?> get props => [device];

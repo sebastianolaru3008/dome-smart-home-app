@@ -1,13 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 
-import '../../../../../common/navigation/routes.dart';
 import '../../../domain/device_entity.dart';
 import '../../../services/api/devices_service.dart';
 
 part 'new_devices_event.dart';
-
 part 'new_devices_state.dart';
 
 class NewDevicesBloc extends Bloc<NewDevicesEvent, NewDevicesState> {
@@ -21,15 +18,11 @@ class NewDevicesBloc extends Bloc<NewDevicesEvent, NewDevicesState> {
   _loadNewDevices(_, Emitter<NewDevicesState> emit) async {
     var devices = await devicesService.getNewDevices();
 
-    emit(NewDevicesLoaded(devices: devices));
+    emit(NewDevicesLoaded(devices: devices, isNewDeviceAdded: false));
   }
 
   _addNewDevice(AddNewDevice event, Emitter<NewDevicesState> emit) async {
     await devicesService.addDevice(event.device);
-
-    // Get.to(const Devices());
-
-    event.navKey.currentState?.pushNamed(Routes.rootNavigator);
-
+    emit((state as NewDevicesLoaded).copyWith(isNewDeviceAdded: true));
   }
 }

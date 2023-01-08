@@ -7,8 +7,7 @@ abstract class DevicesState extends Equatable {
   List<Object> get props => [];
 }
 
-class DevicesInitial extends DevicesState {
-}
+class DevicesInitial extends DevicesState {}
 
 class DevicesLoaded extends DevicesState {
   const DevicesLoaded({required this.devices});
@@ -18,3 +17,7 @@ class DevicesLoaded extends DevicesState {
   @override
   List<Object> get props => [];
 }
+
+class DevicesScanning extends DevicesState {}
+
+class DevicesDiscovered extends DevicesState {}

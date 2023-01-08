@@ -5,11 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/device_entity.dart';
 
 class NewDeviceCard extends StatelessWidget {
+  const NewDeviceCard({Key? key, required this.device}) : super(key: key);
+
   final DeviceEntity device;
-
-  const NewDeviceCard({Key? key, required this.device, required this.navKey}) : super(key: key);
-
-  final GlobalKey<NavigatorState> navKey;
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +17,12 @@ class NewDeviceCard extends StatelessWidget {
       ),
       child: GestureDetector(
         onTap: () {
-          context.read<NewDevicesBloc>().add(AddNewDevice(navKey: navKey, device: device));
+          context.read<NewDevicesBloc>().add(AddNewDevice(device: device));
         },
         child: Card(
           margin: const EdgeInsets.all(8),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           clipBehavior: Clip.antiAliasWithSaveLayer,
           elevation: 10,
           child: SizedBox(
