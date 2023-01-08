@@ -1,5 +1,6 @@
 import 'package:dome_smart_home_app/src/common/navigation/custom_page_router.dart';
 import 'package:dome_smart_home_app/src/common/navigation/routes.dart';
+import 'package:dome_smart_home_app/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:dome_smart_home_app/src/features/devices/presentation/bloc/devices/devices_bloc.dart';
 import 'package:dome_smart_home_app/src/features/devices/presentation/ui/screens/devices_overview_screen.dart';
 import 'package:dome_smart_home_app/src/features/devices/presentation/ui/screens/discovery/discovered_screen.dart';
@@ -20,18 +21,23 @@ class DeviceNavigator extends StatelessWidget {
       listener: (context, state) {
         if (state is DevicesLoaded &&
             DeviceNavigator.currentRoute != Routes.rootNavigator) {
+          context
+              .read<DashboardBloc>()
+              .add(const DashboardEventShowBars(areBarsShowing: true));
           devicesNavigatorKey.currentState?.pushReplacementNamed(
             Routes.rootNavigator,
             arguments: state.devices,
           );
         }
         if (state is DevicesScanning) {
+          context
+              .read<DashboardBloc>()
+              .add(const DashboardEventShowBars(areBarsShowing: false));
           devicesNavigatorKey.currentState?.pushNamed(Routes.devicesScanning);
         }
         if (state is DevicesDiscovered) {
           devicesNavigatorKey.currentState?.pushNamed(Routes.devicesDiscovery);
         }
-        return null;
       },
       child: Navigator(
         key: devicesNavigatorKey,
@@ -40,7 +46,8 @@ class DeviceNavigator extends StatelessWidget {
             case Routes.rootNavigator:
               DeviceNavigator.currentRoute = Routes.rootNavigator;
               return CustomPageRouteBuilder(
-                screen: DevicesOverviewScreen(),
+                transitionDurationMilliSeconds: 0,
+                screen: const DevicesOverviewScreen(),
               );
             case Routes.devicesScanning:
               DeviceNavigator.currentRoute = Routes.devicesScanning;
