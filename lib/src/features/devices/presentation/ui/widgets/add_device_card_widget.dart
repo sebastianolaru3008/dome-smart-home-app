@@ -1,5 +1,4 @@
 import 'package:dome_smart_home_app/src/features/devices/presentation/bloc/devices/devices_bloc.dart';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,8 +17,7 @@ class AddDeviceCard extends StatelessWidget {
         dashPattern: const [15, 10],
         radius: const Radius.circular(10),
         child: GestureDetector(
-          onTap: () =>
-              context.read<DevicesBloc>().add(GoToScanningScreen(context)),
+          onTap: () => context.read<DevicesBloc>().add(GoToScanningScreen()),
           child: Card(
             margin: const EdgeInsets.all(8),
             color: Colors.transparent,

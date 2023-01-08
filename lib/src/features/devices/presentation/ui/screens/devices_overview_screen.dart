@@ -11,18 +11,14 @@ class DevicesOverviewScreen extends StatelessWidget {
     return Scaffold(
       body: BlocBuilder<DevicesBloc, DevicesState>(
         builder: (context, state) {
-          if (state is DevicesInitial) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
           if (state is DevicesLoaded) {
             return DevicesOverview(
               devices: state.devices,
             );
           }
-
-          return const SizedBox();
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
     );

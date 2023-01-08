@@ -9,14 +9,6 @@ abstract class DevicesEvent extends Equatable {
 
 class LoadDevices extends DevicesEvent {}
 
-class GoToScanningScreen extends DevicesEvent {
-  final BuildContext context;
+class GoToScanningScreen extends DevicesEvent {}
 
-  GoToScanningScreen(this.context);
-}
-
-class GoToDiscoveredDevicesScreen extends DevicesEvent {
-  final BuildContext context;
-
-  GoToDiscoveredDevicesScreen(this.context);
-}
+class GoToDiscoveredDevicesScreen extends DevicesEvent {}

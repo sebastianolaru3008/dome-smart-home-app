@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/device_entity.dart';
 
 class NewDeviceCard extends StatelessWidget {
-  final DeviceEntity device;
-
   const NewDeviceCard({Key? key, required this.device}) : super(key: key);
+
+  final DeviceEntity device;
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +17,12 @@ class NewDeviceCard extends StatelessWidget {
       ),
       child: GestureDetector(
         onTap: () {
-          context.read<NewDevicesBloc>().add(AddNewDevice(context: context, device: device));
+          context.read<NewDevicesBloc>().add(AddNewDevice(device: device));
         },
         child: Card(
           margin: const EdgeInsets.all(8),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           clipBehavior: Clip.antiAliasWithSaveLayer,
           elevation: 10,
           child: SizedBox(

@@ -4,9 +4,9 @@ import '../../../domain/device_entity.dart';
 import 'new_device_card.dart';
 
 class NewDevicesList extends StatelessWidget {
-  final List<DeviceEntity> new_devices;
+  const NewDevicesList({Key? key, required this.newDevices}) : super(key: key);
 
-  const NewDevicesList({Key? key, required this.new_devices}) : super(key: key);
+  final List<DeviceEntity> newDevices;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class NewDevicesList extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
-            children: new_devices
+            children: newDevices
                 .map((device) => NewDeviceCard(device: device))
                 .toList()),
       ),

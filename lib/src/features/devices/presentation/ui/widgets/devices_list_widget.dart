@@ -5,12 +5,9 @@ import 'add_device_card_widget.dart';
 import 'device_card_widget.dart';
 
 class DevicesList extends StatelessWidget {
-  final List<DeviceEntity> devices;
+  const DevicesList({Key? key, required this.devices}) : super(key: key);
 
-  const DevicesList({
-    Key? key,
-    required this.devices,
-  }) : super(key: key);
+  final List<DeviceEntity> devices;
 
   @override
   Widget build(BuildContext context) {
