@@ -7,15 +7,35 @@ import 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  AuthenticationBloc({required AuthenticationService authenticationService}) : super(AuthenticationInitial()) {
+  final AuthenticationService authenticationService;
+
+  AuthenticationBloc({required this.authenticationService})
+      : super(AuthenticationInitial()) {
     on<RegisterButtonPressed>((_, emit) {
       emit(AuthenticationRegister());
     });
-    on<AuthenticateUser>((_, emit) {
-      emit(const AuthenticationSucceed(role: Role.grandparent));
+    on<AuthenticateUser>((event, emit) {
+      authenticationService.registerUser(UserEntity(
+          name: event.name,
+          email: event.email,
+          password: event.password,
+          role: Role.other));
+      emit(AuthenticationInitial());
+
     });
+
     on<GoToLoginPage>((_, emit) {
       emit(AuthenticationInitial());
     });
+    on<LoginEvent>(_loginUser);
+  }
+
+  _loginUser(LoginEvent event, Emitter<AuthenticationState> emit) {
+    final user = authenticationService.loginUser(event.email, event.password);
+    if (user != null) {
+      emit(AuthenticationSucceed(role: user.role));
+    } else {
+      emit(const AuthenticationInitial(hasError: true));
+    }
   }
 }
