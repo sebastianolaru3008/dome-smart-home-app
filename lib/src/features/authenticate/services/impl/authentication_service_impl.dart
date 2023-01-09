@@ -74,4 +74,14 @@ class AuthenticationServiceImpl implements AuthenticationService {
       (user) => user.email == email && user.password == password,
     );
   }
+
+  @override
+  Future<void> setIsHome(UserEntity user, bool isHome) {
+    users.forEach((element) {
+      if (element.email == user.email) {
+        element.isHome = isHome;
+      }
+    });
+    return Future.delayed(Duration(seconds: 1));
+  }
 }

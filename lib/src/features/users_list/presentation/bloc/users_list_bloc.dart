@@ -5,13 +5,13 @@ import 'package:dome_smart_home_app/src/features/users_list/services/api/users_l
 import 'package:equatable/equatable.dart';
 
 part 'users_list_event.dart';
+
 part 'users_list_state.dart';
 
 class UsersListBloc extends Bloc<UsersListEvent, UsersListState> {
-  UsersListBloc({
-    required this.usersListService,
-    required this.authenticationService
-  }) : super(UsersListInitial()) {
+  UsersListBloc(
+      {required this.usersListService, required this.authenticationService})
+      : super(UsersListInitial()) {
     on<LoadUsersListEvent>(_onLoadUsersList);
     on<RemoveUserEvent>(_onRemoveUser);
     on<AddUserEvent>(_onAddUser);
@@ -41,8 +41,8 @@ class UsersListBloc extends Bloc<UsersListEvent, UsersListState> {
 
   _onAddUser(AddUserEvent event, Emitter<UsersListState> emit) {
     List<UserEntity> allUsers = authenticationService.allUsers;
-    for(var user in allUsers){
-      if(user.email == event.email){
+    for (var user in allUsers) {
+      if (user.email == event.email) {
         user.role = event.role;
         usersListService.familyMembers.add(user);
       }

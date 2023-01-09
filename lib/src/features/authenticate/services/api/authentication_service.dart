@@ -5,4 +5,5 @@ abstract class AuthenticationService {
 
   void registerUser(UserEntity userEntity);
   UserEntity? loginUser(String email, String password);
+  Future<void> setIsHome(UserEntity user, bool isHome);
 }

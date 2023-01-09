@@ -25,5 +25,5 @@ class AddUserEvent extends UsersListEvent {
   final Role role;
 
   @override
-  List<Object?> get props => [email,role];
+  List<Object?> get props => [email, role];
 }
