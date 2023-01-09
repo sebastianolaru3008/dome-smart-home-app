@@ -5,6 +5,13 @@ abstract class DevicesState extends Equatable {
 
   @override
   List<Object> get props => [];
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      super == other &&
+          other is! DevicesState &&
+          runtimeType == other.runtimeType;
 }
 
 class DevicesInitial extends DevicesState {}

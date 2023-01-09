@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dome_smart_home_app/src/common/navigation/custom_page_router.dart';
 import 'package:dome_smart_home_app/src/common/navigation/routes.dart';
 import 'package:dome_smart_home_app/src/features/devices/presentation/bloc/devices/devices_bloc.dart';
@@ -18,6 +20,7 @@ class DeviceNavigator extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<DevicesBloc, DevicesState>(
       listener: (context, state) {
+        log("Devices state is $state", name: "Devices Navigator");
         if (state is DevicesLoaded &&
             DeviceNavigator.currentRoute != Routes.rootNavigator) {
           devicesNavigatorKey.currentState?.pushReplacementNamed(

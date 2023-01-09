@@ -12,7 +12,7 @@ class AuthenticationBloc
       emit(AuthenticationRegister());
     });
     on<AuthenticateUser>((_, emit) {
-      emit(const AuthenticationSucceed(role: Role.parent));
+      emit(const AuthenticationSucceed(role: Role.grandparent));
     });
     on<GoToLoginPage>((_, emit) {
       emit(AuthenticationInitial());

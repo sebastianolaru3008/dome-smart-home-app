@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class DeviceEntity extends Equatable {
-  const DeviceEntity({
+  DeviceEntity({
     required this.name,
     this.full_name,
     this.imageAssetPath,
@@ -17,7 +17,7 @@ class DeviceEntity extends Equatable {
   final String name;
   final String? full_name;
   final String? imageAssetPath;
-  final String? state;
+  String? state;
   final DeviceType? type;
   final int? temperature;
   final bool binaryState;
