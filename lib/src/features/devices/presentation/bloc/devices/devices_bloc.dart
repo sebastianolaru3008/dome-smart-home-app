@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/device_entity.dart';
 
 part 'devices_event.dart';
+
 part 'devices_state.dart';
 
 class DevicesBloc extends Bloc<DevicesEvent, DevicesState> {
@@ -17,6 +18,8 @@ class DevicesBloc extends Bloc<DevicesEvent, DevicesState> {
     on<LoadDevices>(_loadDevices);
     on<GoToScanningScreen>(_goToScanningScreen);
     on<GoToDiscoveredDevicesScreen>(_goToDiscoveredDevicesScreen);
+    on<DeleteDeviceEvent>(_deleteDevice);
+    on<SwitchDeviceStateEvent>(_switchDeviceState);
   }
 
   _loadDevices(_, Emitter<DevicesState> emit) async {
@@ -37,5 +40,19 @@ class DevicesBloc extends Bloc<DevicesEvent, DevicesState> {
   _goToDiscoveredDevicesScreen(
       GoToDiscoveredDevicesScreen event, Emitter<DevicesState> emit) {
     emit(DevicesDiscovered());
+  }
+
+  _deleteDevice(DeleteDeviceEvent event, Emitter<DevicesState> emit) async {
+    emit(DevicesInitial());
+    await devicesService.deleteDevice(event.device);
+    emit(DevicesLoaded(devices: await devicesService.getDevices()));
+  }
+
+
+
+  _switchDeviceState(SwitchDeviceStateEvent event, Emitter<DevicesState> emit) async {
+    // emit(DevicesInitial());
+    await devicesService.switchDeviceState(event.device);
+    emit(DevicesLoaded(devices: await devicesService.getDevices()));
   }
 }

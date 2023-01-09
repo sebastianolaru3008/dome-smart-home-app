@@ -1,4 +1,10 @@
+import 'dart:developer';
+
+import 'package:dome_smart_home_app/src/features/authenticate/presentation/bloc/authentication_bloc.dart';
+import 'package:dome_smart_home_app/src/features/authenticate/presentation/bloc/authentication_state.dart';
+import 'package:dome_smart_home_app/src/features/users_list/domain/user_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/device_entity.dart';
 import 'add_device_card_widget.dart';
@@ -11,6 +17,12 @@ class DevicesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var state = context.watch<AuthenticationBloc>().state;
+    var role = Role.none;
+    if (state is AuthenticationSucceed) {
+      log("User role is ${state.role.toSentenceCaseString()}", name: "Devices Overview");
+      role = state.role;
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -34,7 +46,7 @@ class DevicesList extends StatelessWidget {
               childAspectRatio: 0.8,
             ),
             children: [
-              ...devices.map((device) => DeviceCard(device: device)).toList(),
+              ...devices.map((device) => DeviceCard(device: device, userRole: role)).toList(),
               AddDeviceCard(),
             ],
           ),
