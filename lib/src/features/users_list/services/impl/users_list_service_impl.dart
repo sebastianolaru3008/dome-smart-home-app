@@ -3,11 +3,49 @@ import '../api/users_list_service.dart';
 
 class UsersListServiceImpl implements UsersListService {
   List<UserEntity> entities = [
-     UserEntity(name: "John",email:"john@gmail.com", password:"john",role: Role.parent),
-     UserEntity(name: "Gabriella",email:"gabriella@gmail.com", password: "gabriella", role: Role.parent),
-     UserEntity(name: "Justin",email: "justin@gmail.com", password:"justin",role: Role.kid),
-     UserEntity(name: "Consuela",email:"consuela@gmail.com", password:"consuela", role: Role.grandparent),
-     UserEntity(name: "Bob",email:"bob@gmail.com",password:"bob",role: Role.grandparent)
+    UserEntity(
+        name: "John",
+        email: "john@gmail.com",
+        password: "john",
+        role: Role.parent),
+    UserEntity(
+        name: "Gabriella",
+        email: "gabriella@gmail.com",
+        password: "gabriella",
+        role: Role.parent),
+    UserEntity(
+        name: "Justin",
+        email: "justin@gmail.com",
+        password: "justin",
+        role: Role.kid),
+    UserEntity(
+        name: "Consuela",
+        email: "consuela@gmail.com",
+        password: "consuela",
+        role: Role.grandparent),
+    UserEntity(
+        name: "Bob",
+        email: "bob@gmail.com",
+        password: "bob",
+        role: Role.grandparent),
+    UserEntity(
+      name: "PARENT",
+      email: "p",
+      password: "p",
+      role: Role.parent,
+    ),
+    UserEntity(
+      name: "KID",
+      email: "k",
+      password: "k",
+      role: Role.kid,
+    ),
+    UserEntity(
+      name: "GRANDPARENT",
+      email: "g",
+      password: "g",
+      role: Role.grandparent,
+    ),
   ];
 
   @override

@@ -1,10 +1,9 @@
-import 'package:dome_smart_home_app/src/common/locator/service_locator.dart';
 import 'package:dome_smart_home_app/src/features/authenticate/presentation/bloc/authentication_event.dart';
+import 'package:dome_smart_home_app/src/features/authenticate/presentation/bloc/authentication_state.dart';
 import 'package:dome_smart_home_app/src/features/authenticate/presentation/ui/widgets/input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../services/api/authentication_service.dart';
 import '../../bloc/authentication_bloc.dart';
 
 class LoginWidget extends StatefulWidget {
@@ -15,7 +14,6 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-
   String email = '';
   String password = '';
   bool isError = false;
@@ -23,6 +21,11 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var state = context.watch<AuthenticationBloc>().state;
+    if (state is AuthenticationInitial) {
+      // log(state.hasError.toString());
+      isError = state.hasError;
+    }
     return Container(
       constraints: const BoxConstraints.expand(),
       decoration: const BoxDecoration(
@@ -47,30 +50,43 @@ class _LoginWidgetState extends State<LoginWidget> {
             const SizedBox(height: 30),
             Form(
               child: Column(
-                children:  [
+                children: [
                   InputWidget(
                       placeholderText: 'Email address',
                       icon: Icons.mail_outline,
-                  getText: (text){ email = text;}),
+                      getText: (text) {
+                        email = text;
+                      }),
                   const SizedBox(height: 20),
                   InputWidget(
-                    placeholderText: 'Password',
-                    icon: Icons.lock_outline,
-                    obscureText: true,
-                    showDone: true,
-                      getText: (text){ password = text;}
-                  ),
+                      placeholderText: 'Password',
+                      icon: Icons.lock_outline,
+                      obscureText: true,
+                      showDone: true,
+                      getText: (text) {
+                        password = text;
+                      }),
                   const SizedBox(height: 20),
                   Visibility(
-                      visible: isError,
-                      child: const Text("Incorrect email or password!",
-                          style: TextStyle(color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                            backgroundColor: Colors.white,
-                            fontSize: 18
-                          )),
+                    visible: isError,
+                    child: Container(
+                      // black backgroun
+                      // color: Colors.black.withOpacity(0.7),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Colors.black54,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text("Incorrect email or password!",
+                            style: TextStyle(
+                                color: Colors.red.withOpacity(0.9),
+                                fontWeight: FontWeight.bold,
+                                backgroundColor: Colors.transparent,
+                                fontSize: 18)),
+                      ),
+                    ),
                   )
-
                 ],
               ),
             ),
@@ -95,30 +111,9 @@ class _LoginWidgetState extends State<LoginWidget> {
             const Padding(padding: EdgeInsets.all(8.0)),
             ElevatedButton(
               onPressed: () {
-                if(email!='' && password!='') {
-                  for (var user in locator
-                      .get<AuthenticationService>()
-                      .allUsers) {
-                    if (user.email == email) {
-                      accountExists = true;
-                      if (user.password == password) {
-                        setState(() {
-                          isError = false;
-                        });
-                      } else {
-                        setState(() {
-                          isError = true;
-                        });
-                      }
-                      break;
-                    }
-                  }
-                  if(!accountExists){
-                    isError = true;
-                  }
-                  context.read<AuthenticationBloc>().add(
-                      LoginUser(failure: isError));
-                }
+                context
+                    .read<AuthenticationBloc>()
+                    .add(LoginEvent(email: email, password: password));
               },
               style: ElevatedButton.styleFrom(
                 textStyle: const TextStyle(
