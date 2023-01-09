@@ -15,11 +15,11 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
- // LoginWidget({Key? key}) : super(key: key);
 
   String email = '';
   String password = '';
   bool isError = false;
+  bool accountExists = false;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       placeholderText: 'Email address',
                       icon: Icons.mail_outline,
                   getText: (text){ email = text;}),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   InputWidget(
                     placeholderText: 'Password',
                     icon: Icons.lock_outline,
@@ -60,7 +60,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                     showDone: true,
                       getText: (text){ password = text;}
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Visibility(
                       visible: isError,
                       child: const Text("Incorrect email or password!",
@@ -95,16 +95,30 @@ class _LoginWidgetState extends State<LoginWidget> {
             const Padding(padding: EdgeInsets.all(8.0)),
             ElevatedButton(
               onPressed: () {
-                for(var user in locator.get<AuthenticationService>().allUsers){
-                  if(user.email == email){
-                    if(user.password==password){
-                      setState(() {isError=false; });
-                    }else{
-                      setState(() {isError=true; });
+                if(email!='' && password!='') {
+                  for (var user in locator
+                      .get<AuthenticationService>()
+                      .allUsers) {
+                    if (user.email == email) {
+                      accountExists = true;
+                      if (user.password == password) {
+                        setState(() {
+                          isError = false;
+                        });
+                      } else {
+                        setState(() {
+                          isError = true;
+                        });
+                      }
+                      break;
                     }
                   }
+                  if(!accountExists){
+                    isError = true;
+                  }
+                  context.read<AuthenticationBloc>().add(
+                      LoginUser(failure: isError));
                 }
-                context.read<AuthenticationBloc>().add(LoginUser(failure: isError));
               },
               style: ElevatedButton.styleFrom(
                 textStyle: const TextStyle(

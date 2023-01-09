@@ -13,11 +13,11 @@ class RegisterWidget extends StatefulWidget {
 }
 
 class _RegisterWidgetState extends State<RegisterWidget> {
-   //RegisterWidget({Key? key}) : super(key: key);
 
   String email = '';
   String name = '';
   String password = '';
+  String confirmPassword = '';
   bool isError=false;
 
   @override
@@ -55,36 +55,36 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                     InputWidget(
                         placeholderText: 'Name', icon: Icons.person_outline,
                         getText: (text){ name = text;}),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     InputWidget(
                         placeholderText: 'Email address',
                         icon: Icons.mail_outline,
                         getText: (text){email = text;}),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     InputWidget(
                         placeholderText: 'Password',
                         icon: Icons.lock_outline,
                         obscureText: true,
                         getText: (text){password = text;}),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     InputWidget(
                       placeholderText: 'Repeat password',
                       icon: Icons.lock_outline,
                       obscureText: true,
                       showDone: true,
                         getText: (text){
+                        confirmPassword = text;
                         if(password != text && text!=""){
-                          print("aa");
                           setState(() {isError=true; });
                         }else{
                           setState(() {isError=false; });
                         }
                       }
                     ),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     Visibility(
                       visible: isError,
-                      child: const Text("Passwords don't coincide!",
+                      child: const Text("Passwords don't match!",
                           style: TextStyle(color: Colors.red,
                               fontWeight: FontWeight.bold,
                               backgroundColor: Colors.white,
@@ -99,7 +99,9 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  context.read<AuthenticationBloc>().add(AuthenticateUser(name: name,email: email,password: password));
+                  if(!isError && name!='' && email!='' && password!='' && confirmPassword!=''){
+                    context.read<AuthenticationBloc>().add(AuthenticateUser(name: name,email: email,password: password));
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(
