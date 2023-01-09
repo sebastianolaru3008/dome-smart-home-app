@@ -53,7 +53,7 @@ class NewDeviceCard extends StatelessWidget {
                         ? Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              device.type!,
+                              device.type!.toSentenceCaseString(),
                               style: const TextStyle(
                                 color: Colors.black54,
                                 fontSize: 18,

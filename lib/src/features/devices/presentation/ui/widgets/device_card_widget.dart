@@ -48,21 +48,18 @@ class DeviceCard extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: device.state != null
-                        ? Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              device.state!,
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          )
-                        : const SizedBox.shrink(),
-                  ),
+                      padding: const EdgeInsets.all(8.0),
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: Text(
+                          device.getState(),
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      )),
                 ),
               ],
             ),
