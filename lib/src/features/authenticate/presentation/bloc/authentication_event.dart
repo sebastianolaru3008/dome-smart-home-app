@@ -7,5 +7,16 @@ abstract class AuthenticationEvent extends Equatable {
 }
 
 class RegisterButtonPressed extends AuthenticationEvent {}
-class AuthenticateUser extends AuthenticationEvent {}
+class AuthenticateUser extends AuthenticationEvent {
+  const AuthenticateUser({required this.name, required this.email, required this.password});
+
+  final String name;
+  final String email;
+  final String password;
+}
+class LoginUser extends AuthenticationEvent {
+  const LoginUser({required this.failure});
+
+  final bool failure;
+}
 class GoToLoginPage extends AuthenticationEvent {}

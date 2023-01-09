@@ -1,12 +1,25 @@
+import 'package:dome_smart_home_app/src/common/locator/service_locator.dart';
 import 'package:dome_smart_home_app/src/features/authenticate/presentation/bloc/authentication_event.dart';
 import 'package:dome_smart_home_app/src/features/authenticate/presentation/ui/widgets/input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../services/api/authentication_service.dart';
 import '../../bloc/authentication_bloc.dart';
 
-class LoginWidget extends StatelessWidget {
-  const LoginWidget({Key? key}) : super(key: key);
+class LoginWidget extends StatefulWidget {
+  const LoginWidget({super.key});
+
+  @override
+  State<LoginWidget> createState() => _LoginWidgetState();
+}
+
+class _LoginWidgetState extends State<LoginWidget> {
+ // LoginWidget({Key? key}) : super(key: key);
+
+  String email = '';
+  String password = '';
+  bool isError = false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +51,26 @@ class LoginWidget extends StatelessWidget {
                   InputWidget(
                       placeholderText: 'Email address',
                       icon: Icons.mail_outline,
-                  getText: (text){}),
+                  getText: (text){ email = text;}),
                   SizedBox(height: 20),
                   InputWidget(
                     placeholderText: 'Password',
                     icon: Icons.lock_outline,
                     obscureText: true,
                     showDone: true,
-                      getText: (text){}
+                      getText: (text){ password = text;}
                   ),
+                  SizedBox(height: 20),
+                  Visibility(
+                      visible: isError,
+                      child: const Text("Incorrect email or password!",
+                          style: TextStyle(color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                            backgroundColor: Colors.white,
+                            fontSize: 18
+                          )),
+                  )
+
                 ],
               ),
             ),
@@ -71,7 +95,16 @@ class LoginWidget extends StatelessWidget {
             const Padding(padding: EdgeInsets.all(8.0)),
             ElevatedButton(
               onPressed: () {
-                context.read<AuthenticationBloc>().add(AuthenticateUser());
+                for(var user in locator.get<AuthenticationService>().allUsers){
+                  if(user.email == email){
+                    if(user.password==password){
+                      setState(() {isError=false; });
+                    }else{
+                      setState(() {isError=true; });
+                    }
+                  }
+                }
+                context.read<AuthenticationBloc>().add(LoginUser(failure: isError));
               },
               style: ElevatedButton.styleFrom(
                 textStyle: const TextStyle(

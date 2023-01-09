@@ -5,8 +5,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/authentication_bloc.dart';
 import 'input_widget.dart';
 
-class RegisterWidget extends StatelessWidget {
-  const RegisterWidget({Key? key}) : super(key: key);
+class RegisterWidget extends StatefulWidget {
+  const RegisterWidget({super.key});
+
+  @override
+  State<RegisterWidget> createState() => _RegisterWidgetState();
+}
+
+class _RegisterWidgetState extends State<RegisterWidget> {
+   //RegisterWidget({Key? key}) : super(key: key);
+
+  String email = '';
+  String name = '';
+  String password = '';
+  bool isError=false;
 
   @override
   Widget build(BuildContext context) {
@@ -41,26 +53,44 @@ class RegisterWidget extends StatelessWidget {
                 child: Column(
                   children:  [
                     InputWidget(
-                        placeholderText: 'Name', icon: Icons.person_outline,getText: (text){}),
+                        placeholderText: 'Name', icon: Icons.person_outline,
+                        getText: (text){ name = text;}),
                     SizedBox(height: 15),
                     InputWidget(
                         placeholderText: 'Email address',
                         icon: Icons.mail_outline,
-                        getText: (text){}),
+                        getText: (text){email = text;}),
                     SizedBox(height: 15),
                     InputWidget(
                         placeholderText: 'Password',
                         icon: Icons.lock_outline,
                         obscureText: true,
-                        getText: (text){}),
+                        getText: (text){password = text;}),
                     SizedBox(height: 15),
                     InputWidget(
                       placeholderText: 'Repeat password',
                       icon: Icons.lock_outline,
                       obscureText: true,
                       showDone: true,
-                        getText: (text){}
+                        getText: (text){
+                        if(password != text && text!=""){
+                          print("aa");
+                          setState(() {isError=true; });
+                        }else{
+                          setState(() {isError=false; });
+                        }
+                      }
                     ),
+                    SizedBox(height: 15),
+                    Visibility(
+                      visible: isError,
+                      child: const Text("Passwords don't coincide!",
+                          style: TextStyle(color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                              backgroundColor: Colors.white,
+                              fontSize: 18
+                          )),
+                    )
                   ],
                 ),
               ),
@@ -69,7 +99,7 @@ class RegisterWidget extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  context.read<AuthenticationBloc>().add(AuthenticateUser());
+                  context.read<AuthenticationBloc>().add(AuthenticateUser(name: name,email: email,password: password));
                 },
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(
