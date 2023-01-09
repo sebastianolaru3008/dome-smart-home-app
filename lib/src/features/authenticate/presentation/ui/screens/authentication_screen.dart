@@ -16,10 +16,10 @@ class AuthenticationScreen extends StatelessWidget {
       body: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, state) {
           if (state is AuthenticationInitial) {
-            return const LoginWidget();
+            return LoginWidget();
           }
           if (state is AuthenticationRegister) {
-            return const RegisterWidget();
+            return  RegisterWidget();
           }
           if (state is AuthenticationSucceed) {
             return const Dashboard();
