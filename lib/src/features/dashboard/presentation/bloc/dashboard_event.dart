@@ -12,3 +12,12 @@ class DashboardEventBottomNavigationChanged extends DashboardEvent {
   @override
   List<Object> get props => [index];
 }
+
+class DashboardEventShowBars extends DashboardEvent {
+  const DashboardEventShowBars({required this.areBarsShowing});
+
+  final bool areBarsShowing;
+
+  @override
+  List<Object?> get props => [areBarsShowing];
+}

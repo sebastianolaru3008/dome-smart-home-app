@@ -1,3 +1,4 @@
+import 'package:dome_smart_home_app/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:dome_smart_home_app/src/features/users_list/presentation/bloc/users_list_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,10 +14,8 @@ class DropdownDemo extends StatefulWidget {
 }
 
 class AddUserScreen extends State<DropdownDemo> {
-  //AddUserScreen({Key? key}) : super();
-
   Role dropdownValue = Role.parent;
-  String email ='';
+  String email = '';
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +48,11 @@ class AddUserScreen extends State<DropdownDemo> {
             Form(
               child: Column(
                 children: [
-                   InputWidget(
-                      placeholderText: 'Email address',
-                      icon: Icons.mail_outline,
-                    getText: (text){
-                       email = text;
+                  InputWidget(
+                    placeholderText: 'Email address',
+                    icon: Icons.mail_outline,
+                    getText: (text) {
+                      email = text;
                     },
                   ),
                   const SizedBox(height: 20),
@@ -82,11 +81,33 @@ class AddUserScreen extends State<DropdownDemo> {
             const Spacer(
               flex: 2,
             ),
+            ElevatedButton(
+              onPressed: () {
+                context
+                    .read<DashboardBloc>()
+                    .add(const DashboardEventShowBars(areBarsShowing: true));
+                Navigator.pop(context);
+              },
+              style: ElevatedButton.styleFrom(
+                textStyle: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.white,
+                minimumSize: const Size(double.infinity, 50),
+              ),
+              child: const Text('Back to Dashboard'),
+            ),
             const Padding(padding: EdgeInsets.all(8.0)),
             ElevatedButton(
               onPressed: () {
-                context.read<UsersListBloc>().add(
-                    AddUserEvent(email:email, role: dropdownValue));
+                context
+                    .read<UsersListBloc>()
+                    .add(AddUserEvent(email: email, role: dropdownValue));
+                context
+                    .read<DashboardBloc>()
+                    .add(const DashboardEventShowBars(areBarsShowing: true));
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
@@ -99,7 +120,7 @@ class AddUserScreen extends State<DropdownDemo> {
                 minimumSize: const Size(double.infinity, 50),
               ),
               child: const Text('Add user'),
-            )
+            ),
           ],
         ),
       ),
@@ -108,11 +129,16 @@ class AddUserScreen extends State<DropdownDemo> {
 }
 
 List<DropdownMenuItem<Role>> get dropdownItems {
-  List<DropdownMenuItem<Role>> roles =  [
-    DropdownMenuItem(value: Role.parent, child: Text(Role.parent.toSentenceCaseString())),
-    DropdownMenuItem(value: Role.grandparent, child: Text(Role.grandparent.toSentenceCaseString())),
-    DropdownMenuItem(value: Role.kid, child: Text(Role.kid.toSentenceCaseString())),
-    DropdownMenuItem(value: Role.other, child: Text(Role.other.toSentenceCaseString())),
+  List<DropdownMenuItem<Role>> roles = [
+    DropdownMenuItem(
+        value: Role.parent, child: Text(Role.parent.toSentenceCaseString())),
+    DropdownMenuItem(
+        value: Role.grandparent,
+        child: Text(Role.grandparent.toSentenceCaseString())),
+    DropdownMenuItem(
+        value: Role.kid, child: Text(Role.kid.toSentenceCaseString())),
+    DropdownMenuItem(
+        value: Role.other, child: Text(Role.other.toSentenceCaseString())),
   ];
   return roles;
 }

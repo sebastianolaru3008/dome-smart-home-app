@@ -1,6 +1,8 @@
 import 'package:dome_smart_home_app/src/common/navigation/routes.dart';
+import 'package:dome_smart_home_app/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddTileWidget extends StatelessWidget {
   const AddTileWidget({Key? key}) : super(key: key);
@@ -11,6 +13,9 @@ class AddTileWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
       child: GestureDetector(
         onTap: () {
+          context
+              .read<DashboardBloc>()
+              .add(const DashboardEventShowBars(areBarsShowing: false));
           Navigator.pushNamed(context, Routes.userAdd);
         },
         child: DottedBorder(

@@ -54,6 +54,22 @@ class DiscoveredScreen extends StatelessWidget {
                           height: 20,
                         ),
                         ElevatedButton(
+                          onPressed: () {
+                            context.read<DevicesBloc>().add(LoadDevices());
+                          },
+                          style: ElevatedButton.styleFrom(
+                            textStyle: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            foregroundColor: Colors.black,
+                            backgroundColor: Colors.white,
+                            minimumSize: const Size(double.infinity, 50),
+                          ),
+                          child: const Text('Back to Dashboard'),
+                        ),
+                        const Padding(padding: EdgeInsets.all(8.0)),
+                        ElevatedButton(
                           onPressed: () => context
                               .read<DevicesBloc>()
                               .add(GoToScanningScreen()),
