@@ -12,7 +12,7 @@ class AuthenticationBloc
       emit(AuthenticationRegister());
     });
     on<AuthenticateUser>((event, emit) {
-      authenticationService.registerUser(UserEntity(name: event.name, email: event.email, password: event.password, role: ""));
+      authenticationService.registerUser(UserEntity(name: event.name, email: event.email, password: event.password, role: Role.other));
       emit(AuthenticationInitial());
     });
 
