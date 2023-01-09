@@ -20,7 +20,7 @@ class AuthenticationBloc
       if(event.failure){
         emit(AuthenticationInitial());
       }else{
-        emit(AuthenticationSucceed());
+        emit(const AuthenticationSucceed(role: Role.parent));
       }
 
 

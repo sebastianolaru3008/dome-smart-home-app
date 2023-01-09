@@ -48,7 +48,7 @@ class UserTileWidget extends StatelessWidget {
           title: Text(userEntity.name,
               style:
                   const TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
-          subtitle: Text(userEntity.role, style: const TextStyle(fontSize: 16)),
+          subtitle: Text(userEntity.role.toSentenceCaseString(), style: const TextStyle(fontSize: 16)),
         ),
       ),
     );

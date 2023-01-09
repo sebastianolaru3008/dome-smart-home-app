@@ -3,10 +3,7 @@ import 'package:dome_smart_home_app/src/features/devices/presentation/ui/widgets
 import 'package:flutter/cupertino.dart';
 
 class DevicesOverview extends StatelessWidget {
-  const DevicesOverview({
-    Key? key,
-    required this.devices,
-  }) : super(key: key);
+  const DevicesOverview({Key? key, required this.devices}) : super(key: key);
 
   final List<DeviceEntity> devices;
 
