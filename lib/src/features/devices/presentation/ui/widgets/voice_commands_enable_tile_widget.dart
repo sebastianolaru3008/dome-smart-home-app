@@ -1,9 +1,13 @@
+import 'package:dome_smart_home_app/src/features/devices/domain/device_entity.dart';
+import 'package:dome_smart_home_app/src/features/devices/presentation/bloc/voice_commands/voice_commands_bloc.dart';
 import 'package:dome_smart_home_app/src/features/users_list/presentation/ui/widgets/dialog_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VoiceCommandsEnable extends StatefulWidget {
   final bool enabled;
-  const VoiceCommandsEnable(this.enabled);
+  final DeviceEntity deviceEntity;
+  const VoiceCommandsEnable(this.enabled, this.deviceEntity);
 
   @override
   _VoiceCommandsEnableState createState() => _VoiceCommandsEnableState();
@@ -33,6 +37,8 @@ class _VoiceCommandsEnableState extends State<VoiceCommandsEnable> {
           TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
           value: state,
           onChanged:(bool? value) {
+            context.read<VoiceCommandsBloc>()
+                .add(ChangeVoiceCommandsState(deviceEntity: widget.deviceEntity, enabled: value!));
             setState(() {
             state = value!;
           });},),
