@@ -5,6 +5,7 @@ class DialogWidget extends StatelessWidget {
   const DialogWidget({
     Key? key,
     required this.dialogTitle,
+    this.dialogContent,
     required this.textEmptyButton,
     required this.textFullButton,
     required this.onCancelCallback,
@@ -14,6 +15,7 @@ class DialogWidget extends StatelessWidget {
   final String textEmptyButton;
   final String textFullButton;
   final String dialogTitle;
+  final String? dialogContent;
   final VoidCallback onCancelCallback;
   final VoidCallback onFullCallback;
 
@@ -21,12 +23,15 @@ class DialogWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-      child: SizedBox(
-        height: 146,
-        width: 288,
+      child: Container(
+        constraints: const BoxConstraints(
+          minHeight: 146,
+          maxWidth: 288,
+        ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 40),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 dialogTitle,
@@ -37,7 +42,19 @@ class DialogWidget extends StatelessWidget {
                   color: Colors.grey.shade600,
                 ),
               ),
-              const Spacer(),
+              const SizedBox(height: 8),
+              dialogContent != null
+                  ? Text(
+                      dialogContent!,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.grey.shade600,
+                      ),
+                    )
+                  : const SizedBox(),
+              const SizedBox(height: 24),
               Row(
                 children: [
                   ButtonWidget(

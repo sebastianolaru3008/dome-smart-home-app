@@ -1,6 +1,9 @@
 import 'package:dome_smart_home_app/src/features/dashboard/presentation/ui/widgets/panic_scenario_button.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../users_list/presentation/ui/widgets/dialog_widget.dart';
+import '../../../domain/panic_event.dart';
+
 class PanicBottomSheet extends StatelessWidget {
   const PanicBottomSheet({Key? key}) : super(key: key);
 
@@ -45,7 +48,9 @@ class PanicBottomSheet extends StatelessWidget {
                     Icons.whatshot,
                     color: Colors.deepOrange,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    _respondToEvent(PanicEventType.fire, context);
+                  },
                 ),
                 PanicScenarioButton(
                   title: "Flood",
@@ -53,7 +58,9 @@ class PanicBottomSheet extends StatelessWidget {
                     Icons.water_rounded,
                     color: Colors.blue,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    _respondToEvent(PanicEventType.flood, context);
+                  },
                 ),
               ],
             ),
@@ -65,7 +72,9 @@ class PanicBottomSheet extends StatelessWidget {
                     Icons.monitor_heart,
                     color: Colors.red,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    _respondToEvent(PanicEventType.health, context);
+                  },
                 ),
                 PanicScenarioButton(
                   title: "Gas leak",
@@ -73,13 +82,36 @@ class PanicBottomSheet extends StatelessWidget {
                     Icons.gas_meter,
                     color: Colors.green,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    _respondToEvent(PanicEventType.gasLeak, context);
+                  },
                 ),
               ],
             ),
           ],
         ),
       ),
+    );
+  }
+
+  void _respondToEvent(PanicEventType fire, BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext childContext) {
+        return DialogWidget(
+          dialogTitle: "Are you sure you want to proceed with the action?",
+          dialogContent:
+              "This will notify all users and act on all devices accordingly",
+          textEmptyButton: "No, cancel",
+          textFullButton: "Proceed",
+          onCancelCallback: () {
+            Navigator.pop(childContext);
+          },
+          onFullCallback: () {
+            Navigator.pop(childContext);
+          },
+        );
+      },
     );
   }
 }
