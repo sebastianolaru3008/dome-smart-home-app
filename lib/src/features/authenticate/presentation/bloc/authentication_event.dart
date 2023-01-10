@@ -29,3 +29,15 @@ class LoginUser extends AuthenticationEvent {
   final bool failure;
 }
 class GoToLoginPage extends AuthenticationEvent {}
+
+class SetIsHomeEvent extends AuthenticationEvent {
+  const SetIsHomeEvent(
+      {required this.isHome, required this.user, required this.callback});
+
+  final bool isHome;
+  final UserEntity user;
+  final Function() callback;
+
+  @override
+  List<Object?> get props => [isHome, user];
+}

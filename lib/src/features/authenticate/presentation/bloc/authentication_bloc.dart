@@ -21,21 +21,26 @@ class AuthenticationBloc
           password: event.password,
           role: Role.other));
       emit(AuthenticationInitial());
-
     });
 
     on<GoToLoginPage>((_, emit) {
       emit(AuthenticationInitial());
     });
     on<LoginEvent>(_loginUser);
+    on<SetIsHomeEvent>(_onSetIsHome);
   }
 
   _loginUser(LoginEvent event, Emitter<AuthenticationState> emit) {
     final user = authenticationService.loginUser(event.email, event.password);
     if (user != null) {
-      emit(AuthenticationSucceed(role: user.role));
+      emit(AuthenticationSucceed(user: user));
     } else {
       emit(const AuthenticationInitial(hasError: true));
     }
+  }
+
+  _onSetIsHome(SetIsHomeEvent event, Emitter<AuthenticationState> emit) async {
+    await authenticationService.setIsHome(event.user, event.isHome);
+    event.callback();
   }
 }

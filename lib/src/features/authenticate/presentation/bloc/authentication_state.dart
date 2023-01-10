@@ -18,10 +18,10 @@ class AuthenticationInitial extends AuthenticationState {
 class AuthenticationRegister extends AuthenticationState {}
 
 class AuthenticationSucceed extends AuthenticationState {
-  final Role role;
+  final UserEntity user;
 
-  const AuthenticationSucceed({required this.role});
+  const AuthenticationSucceed({required this.user});
 
   @override
-  List<Object> get props => [role];
+  List<Object> get props => [user];
 }

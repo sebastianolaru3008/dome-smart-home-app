@@ -7,5 +7,4 @@ abstract class UsersListService {
 
   void deleteFamilyMember(UserEntity userEntity);
 
-
 }
