@@ -6,4 +6,5 @@ abstract class DevicesService {
   Future<void> addDevice(DeviceEntity device);
   Future<void> deleteDevice(DeviceEntity device);
   Future<void> switchDeviceState(DeviceEntity device);
+  List<DeviceEntity> get allDevices;
 }

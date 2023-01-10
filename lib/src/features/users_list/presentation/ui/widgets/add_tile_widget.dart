@@ -5,7 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddTileWidget extends StatelessWidget {
-  const AddTileWidget({Key? key}) : super(key: key);
+  const AddTileWidget({Key? key, required this.title, required this.icon, required this.isUserTile}) : super(key: key);
+
+  final String title;
+  final Icon icon;
+  final bool isUserTile;
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +17,12 @@ class AddTileWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
       child: GestureDetector(
         onTap: () {
-          context
-              .read<DashboardBloc>()
-              .add(const DashboardEventShowBars(areBarsShowing: false));
-          Navigator.pushNamed(context, Routes.userAdd);
+          if(isUserTile) {
+            context
+                .read<DashboardBloc>()
+                .add(const DashboardEventShowBars(areBarsShowing: false));
+            Navigator.pushNamed(context, Routes.userAdd);
+          }
         },
         child: DottedBorder(
           borderType: BorderType.RRect,
@@ -27,12 +33,9 @@ class AddTileWidget extends StatelessWidget {
           child: SizedBox(
             height: 56,
             child: ListTile(
-              leading: const Icon(
-                Icons.add,
-                size: 32,
-              ),
+              leading: icon,
               title: Text(
-                "Add new user",
+                title,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.grey.shade500,

@@ -1,3 +1,4 @@
+import 'package:dome_smart_home_app/src/features/devices/domain/voice_command_entity.dart';
 import 'package:equatable/equatable.dart';
 
 class DeviceEntity extends Equatable {
@@ -12,6 +13,8 @@ class DeviceEntity extends Equatable {
     this.brightness,
     this.volume,
     this.states,
+    required this.voiceCommands,
+    required this.voiceCommandsEnabled
   });
 
   final String name;
@@ -24,6 +27,8 @@ class DeviceEntity extends Equatable {
   final int? brightness;
   final int? volume;
   final List<String>? states;
+  final List<VoiceCommandEntity> voiceCommands;
+  bool voiceCommandsEnabled;
 
   @override
   List<Object?> get props => [
@@ -36,7 +41,9 @@ class DeviceEntity extends Equatable {
         binaryState,
         brightness,
         volume,
-        states
+        states,
+    voiceCommands,
+    voiceCommandsEnabled
       ];
 
   @override
