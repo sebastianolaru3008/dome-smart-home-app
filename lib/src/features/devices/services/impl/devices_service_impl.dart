@@ -10,6 +10,8 @@ class DevicesServiceImpl implements DevicesService {
       binaryState: false,
       type: DeviceType.smart_speaker,
       states: const ["On, listening", "Playing music", "Off"],
+      id: 1,
+      timer: 10,
     ),
     DeviceEntity(
       name: "Living Window",
@@ -18,6 +20,8 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.window,
       binaryState: true,
       states: const ["Open", "Closed"],
+      timer: 60*60,
+      id: 2,
     ),
     DeviceEntity(
       name: "Thermo",
@@ -27,6 +31,7 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.thermostat,
       states: const ["On", "Off"],
       temperature: 20,
+      id: 3,
     ),
   ];
 
@@ -39,6 +44,7 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.smart_speaker,
       binaryState: false,
       states: const ["On, listening", "Playing music", "Off"],
+      id: 4,
     ),
     DeviceEntity(
       name: "Thermo",
@@ -49,6 +55,7 @@ class DevicesServiceImpl implements DevicesService {
       binaryState: true,
       states: const ["On", "Off"],
       temperature: 20,
+      id: 5,
     ),
     DeviceEntity(
       name: "Living TV",
@@ -58,6 +65,7 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.smart_tv,
       binaryState: true,
       states: const ["On", "Off"],
+      id: 6,
     ),
   ];
 

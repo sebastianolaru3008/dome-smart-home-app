@@ -18,6 +18,7 @@ dependencies:
   dotted_border: ^2.0.0+3
   loading_animation_widget: ^1.2.0+4
   animated_toggle_switch: ^0.6.1
+  sprintf: ^7.0.0
 
 dev_dependencies:
   flutter_test:
