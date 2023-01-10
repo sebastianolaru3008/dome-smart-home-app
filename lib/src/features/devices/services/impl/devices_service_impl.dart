@@ -11,7 +11,7 @@ class DevicesServiceImpl implements DevicesService {
       binaryState: false,
       type: DeviceType.smart_speaker,
       states: const ["On, listening", "Playing music", "Off"],
-      voiceCommands: const [VoiceCommandEntity(name: "Voice command 1"), VoiceCommandEntity(name: "Voice command 2")],
+      voiceCommands: [VoiceCommandEntity(name: "Voice command 1"), VoiceCommandEntity(name: "Voice command 2")],
       voiceCommandsEnabled: true,
     ),
     DeviceEntity(
@@ -111,4 +111,18 @@ class DevicesServiceImpl implements DevicesService {
 
   @override
   List<DeviceEntity> get allDevices => devices;
+
+  @override
+  void addVoiceCommandToDevice(DeviceEntity deviceEntity, VoiceCommandEntity voiceCommand) {
+
+  }
+
+  @override
+  void deleteVoiceCommandFromDevice(DeviceEntity deviceEntity,  VoiceCommandEntity voiceCommandEntity) {
+      devices.forEach((element) {
+        if(element.name==deviceEntity.name){
+          element.voiceCommands.remove(voiceCommandEntity);
+        }
+      });
+  }
 }

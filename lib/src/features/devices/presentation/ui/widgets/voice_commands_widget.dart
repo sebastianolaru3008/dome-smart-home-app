@@ -22,7 +22,7 @@ class VoiceCommandsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => VoiceCommandsBloc(
-      devicesService: locator.get<DevicesService>()),
+      devicesService: locator.get<DevicesService>())..add(LoadVoiceCommandsListEvent(deviceEntity: deviceEntity)),
       child: Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -36,18 +36,28 @@ class VoiceCommandsWidget extends StatelessWidget {
                     color: Colors.grey.shade600,
                     fontSize: 20)),
            VoiceCommandsEnable(deviceEntity.voiceCommandsEnabled,deviceEntity),
-            Expanded(
-                    child: ListView.builder(
-                      itemCount:deviceEntity.voiceCommands.length+1,
-                      itemBuilder: (context, index) {
-                        if (index == deviceEntity.voiceCommands.length) {
-                          return const AddTileWidget(title: "Add voice command", icon: Icon(Icons.keyboard_voice, size: 32,),isUserTile: false,);
-                        }
-                        return VoiceCommandTileWidget(
-                           text:deviceEntity.voiceCommands[index].name);
-                      },
-                    ),
-                  ),
+            BlocBuilder<VoiceCommandsBloc, VoiceCommandsState>(
+              builder: (context, state) {
+            if (state is VoiceCommandsListLoaded) {
+              return Expanded(
+                child: ListView.builder(
+                  itemCount: deviceEntity.voiceCommands.length + 1,
+                  itemBuilder: (context, index) {
+                    if (index == deviceEntity.voiceCommands.length) {
+                      return const AddTileWidget(title: "Add voice command",
+                        icon: Icon(Icons.keyboard_voice, size: 32,),
+                        isUserTile: false,);
+                    }
+                    return VoiceCommandTileWidget(
+                      voiceCommandEntity: deviceEntity.voiceCommands[index],
+                      deviceEntity: deviceEntity,);
+                  },
+                ),
+              );
+            }
+            return const SizedBox();
+  },
+),
           ],
         ),
       ),

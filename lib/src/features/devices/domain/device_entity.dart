@@ -27,7 +27,7 @@ class DeviceEntity extends Equatable {
   final int? brightness;
   final int? volume;
   final List<String>? states;
-  final List<VoiceCommandEntity> voiceCommands;
+  List<VoiceCommandEntity> voiceCommands;
   bool voiceCommandsEnabled;
 
   @override
