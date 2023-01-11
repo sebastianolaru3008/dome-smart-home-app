@@ -34,7 +34,7 @@ class PanicScenarioButton extends StatelessWidget {
             shape: ContinuousRectangleBorder(
               side: const BorderSide(
                 color: Colors.black,
-                width: 2,
+                width: 0.5,
               ),
               borderRadius: BorderRadius.circular(24.0),
             ),

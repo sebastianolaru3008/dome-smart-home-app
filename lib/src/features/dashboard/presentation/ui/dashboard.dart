@@ -1,9 +1,15 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:dome_smart_home_app/src/common/widgets/custom_appbar.dart';
+import 'package:dome_smart_home_app/src/features/authenticate/presentation/bloc/authentication_bloc.dart';
+import 'package:dome_smart_home_app/src/features/authenticate/presentation/bloc/authentication_state.dart';
 import 'package:dome_smart_home_app/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:dome_smart_home_app/src/features/dashboard/presentation/ui/widgets/panic_bottom_sheet.dart';
 import 'package:dome_smart_home_app/src/features/devices/devices.dart';
 import 'package:dome_smart_home_app/src/features/users_list/presentation/users_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Dashboard extends StatelessWidget {
@@ -13,13 +19,16 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => DashboardBloc(),
-      child: const DashboardUI(),
+      child: DashboardUI(),
     );
   }
 }
 
 class DashboardUI extends StatefulWidget {
-  const DashboardUI({Key? key}) : super(key: key);
+  DashboardUI({Key? key}) : super(key: key);
+
+  bool loaded = false;
+  String userImagePath = 'assets/images/users/user.png';
 
   @override
   State<DashboardUI> createState() => _DashboardUIState();
@@ -37,14 +46,28 @@ class _DashboardUIState extends State<DashboardUI>
 
   @override
   Widget build(BuildContext context) {
+    var authState = context.read<AuthenticationBloc>().state;
+    if (authState is AuthenticationSucceed) {
+      var possibleImagePath = 'assets/images/users/${authState.user.name}.png';
+      if (!widget.loaded) {
+        isLocalAsset(possibleImagePath).then((value) {
+          if (value) widget.userImagePath = possibleImagePath;
+          log('isLocalAsset: $value');
+          setState(() {
+            widget.loaded = true;
+          });
+        });
+      }
+    }
+
     return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (context, state) {
         return Scaffold(
           appBar: state.areBarsShowing
               ? buildCustomAppBar(
                   title: "Hi User!",
-                  leading: const CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/users/John.png"),
+                  leading: CircleAvatar(
+                    backgroundImage: AssetImage(widget.userImagePath),
                   ),
                   actions: [
                     Padding(
@@ -119,5 +142,13 @@ class _DashboardUIState extends State<DashboardUI>
         );
       },
     );
+  }
+
+  Future<bool> isLocalAsset(final String assetPath) async {
+    final encoded =
+        utf8.encoder.convert(Uri(path: Uri.encodeFull(assetPath)).path);
+    final asset = await ServicesBinding.instance.defaultBinaryMessenger
+        .send('flutter/assets', encoded.buffer.asByteData());
+    return asset != null;
   }
 }

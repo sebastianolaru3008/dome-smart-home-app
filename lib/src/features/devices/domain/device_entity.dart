@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class DeviceEntity extends Equatable {
   DeviceEntity({
+    required this.id,
     required this.name,
     this.full_name,
     this.imageAssetPath,
@@ -12,8 +13,10 @@ class DeviceEntity extends Equatable {
     this.brightness,
     this.volume,
     this.states,
+    this.timer,
   });
 
+  final int id;
   final String name;
   final String? full_name;
   final String? imageAssetPath;
@@ -24,6 +27,7 @@ class DeviceEntity extends Equatable {
   final int? brightness;
   final int? volume;
   final List<String>? states;
+  final int? timer;
 
   @override
   List<Object?> get props => [

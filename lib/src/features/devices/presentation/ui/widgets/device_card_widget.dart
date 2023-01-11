@@ -1,5 +1,6 @@
 import 'package:dome_smart_home_app/src/features/devices/domain/device_entity.dart';
 import 'package:dome_smart_home_app/src/features/devices/presentation/bloc/devices/devices_bloc.dart';
+import 'package:dome_smart_home_app/src/features/devices/presentation/ui/widgets/timer_dialog.dart';
 import 'package:dome_smart_home_app/src/features/users_list/domain/user_entity.dart';
 import 'package:flutter/material.dart';
 
@@ -124,7 +125,14 @@ class DeviceCard extends StatelessWidget {
   }
 
   void _showTimerDialog(BuildContext context) {
-    // TODO: Implement timer dialog
+    showDialog(
+        context: context,
+        builder: (BuildContext childContext) {
+          return TimerDialogWidget(
+            device: device,
+            kidMode: true,
+          );
+        });
   }
 
   void _switchDeviceState(BuildContext context) {
