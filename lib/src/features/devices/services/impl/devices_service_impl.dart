@@ -14,7 +14,10 @@ class DevicesServiceImpl implements DevicesService {
       states: const ["On, listening", "Playing music", "Off"],
       id: 1,
       timer: 10,
-      voiceCommands: const [VoiceCommandEntity(name: "Voice command 1"), VoiceCommandEntity(name: "Voice command 2")],
+      voiceCommands: [
+        VoiceCommandEntity(name: "Voice command 1"),
+        VoiceCommandEntity(name: "Voice command 2")
+      ],
       voiceCommandsEnabled: true,
     ),
     DeviceEntity(
@@ -24,10 +27,10 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.window,
       binaryState: true,
       states: const ["Open", "Closed"],
-      timer: 60*60,
+      timer: 60 * 60,
       id: 2,
-      voiceCommands: const [],
-      voiceCommandsEnabled:false,
+      voiceCommands: [],
+      voiceCommandsEnabled: false,
     ),
     DeviceEntity(
       name: "Thermo",
@@ -39,8 +42,8 @@ class DevicesServiceImpl implements DevicesService {
       temperature: 20,
       id: 3,
       timer: 5,
-      voiceCommands: const [],
-      voiceCommandsEnabled:false,
+      voiceCommands: [],
+      voiceCommandsEnabled: false,
     ),
   ];
 
@@ -53,8 +56,8 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.smart_speaker,
       binaryState: false,
       states: const ["On, listening", "Playing music", "Off"],
-      voiceCommands: const [],
-      voiceCommandsEnabled:false,
+      voiceCommands: [],
+      voiceCommandsEnabled: false,
       id: 4,
     ),
     DeviceEntity(
@@ -67,8 +70,8 @@ class DevicesServiceImpl implements DevicesService {
       states: const ["On", "Off"],
       temperature: 20,
       id: 5,
-      voiceCommands: const [],
-      voiceCommandsEnabled:false,
+      voiceCommands: [],
+      voiceCommandsEnabled: false,
     ),
     DeviceEntity(
       name: "Living TV",
@@ -78,8 +81,8 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.smart_tv,
       binaryState: true,
       states: const ["On", "Off"],
-      voiceCommands: const [],
-      voiceCommandsEnabled:false,
+      voiceCommands: [],
+      voiceCommandsEnabled: false,
       id: 6,
     ),
   ];
@@ -124,16 +127,18 @@ class DevicesServiceImpl implements DevicesService {
   List<DeviceEntity> get allDevices => devices;
 
   @override
-  void addVoiceCommandToDevice(DeviceEntity deviceEntity, VoiceCommandEntity voiceCommand) {
+  void addVoiceCommandToDevice(
+      DeviceEntity deviceEntity, VoiceCommandEntity voiceCommand) {
     deviceEntity.voiceCommands.add(voiceCommand);
   }
 
   @override
-  void deleteVoiceCommandFromDevice(DeviceEntity deviceEntity,  VoiceCommandEntity voiceCommandEntity) {
-      devices.forEach((element) {
-        if(element.name==deviceEntity.name){
-          element.voiceCommands.remove(voiceCommandEntity);
-        }
-      });
+  void deleteVoiceCommandFromDevice(
+      DeviceEntity deviceEntity, VoiceCommandEntity voiceCommandEntity) {
+    devices.forEach((element) {
+      if (element.name == deviceEntity.name) {
+        element.voiceCommands.remove(voiceCommandEntity);
+      }
+    });
   }
 }
