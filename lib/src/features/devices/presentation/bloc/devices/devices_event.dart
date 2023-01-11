@@ -23,9 +23,10 @@ class DeleteDeviceEvent extends DevicesEvent {
 }
 
 class SwitchDeviceStateEvent extends DevicesEvent {
-  const SwitchDeviceStateEvent({required this.device});
+  const SwitchDeviceStateEvent({this.device, this.deviceId});
 
-  final DeviceEntity device;
+  final DeviceEntity? device;
+  final int? deviceId;
 
   @override
   List<Object?> get props => [device];

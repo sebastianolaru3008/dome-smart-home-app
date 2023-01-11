@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 
 class DeviceEntity extends Equatable {
   DeviceEntity({
+    required this.id,
     required this.name,
     this.full_name,
     this.imageAssetPath,
@@ -13,10 +14,12 @@ class DeviceEntity extends Equatable {
     this.brightness,
     this.volume,
     this.states,
+    this.timer,
     required this.voiceCommands,
     required this.voiceCommandsEnabled
   });
 
+  final int id;
   final String name;
   final String? full_name;
   final String? imageAssetPath;
@@ -29,6 +32,7 @@ class DeviceEntity extends Equatable {
   final List<String>? states;
   List<VoiceCommandEntity> voiceCommands;
   bool voiceCommandsEnabled;
+  final int? timer;
 
   @override
   List<Object?> get props => [

@@ -1,5 +1,6 @@
+import 'package:dome_smart_home_app/src/features/devices/domain/voice_command_entity.dart';
+
 import '../../domain/device_entity.dart';
-import '../../domain/voice_command_entity.dart';
 import '../api/devices_service.dart';
 
 class DevicesServiceImpl implements DevicesService {
@@ -11,6 +12,8 @@ class DevicesServiceImpl implements DevicesService {
       binaryState: false,
       type: DeviceType.smart_speaker,
       states: const ["On, listening", "Playing music", "Off"],
+      id: 1,
+      timer: 10,
       voiceCommands: const [VoiceCommandEntity(name: "Voice command 1"), VoiceCommandEntity(name: "Voice command 2")],
       voiceCommandsEnabled: true,
     ),
@@ -21,6 +24,8 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.window,
       binaryState: true,
       states: const ["Open", "Closed"],
+      timer: 60*60,
+      id: 2,
       voiceCommands: const [],
       voiceCommandsEnabled:false,
     ),
@@ -32,6 +37,8 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.thermostat,
       states: const ["On", "Off"],
       temperature: 20,
+      id: 3,
+      timer: 5,
       voiceCommands: const [],
       voiceCommandsEnabled:false,
     ),
@@ -48,6 +55,7 @@ class DevicesServiceImpl implements DevicesService {
       states: const ["On, listening", "Playing music", "Off"],
       voiceCommands: const [],
       voiceCommandsEnabled:false,
+      id: 4,
     ),
     DeviceEntity(
       name: "Thermo",
@@ -58,6 +66,7 @@ class DevicesServiceImpl implements DevicesService {
       binaryState: true,
       states: const ["On", "Off"],
       temperature: 20,
+      id: 5,
       voiceCommands: const [],
       voiceCommandsEnabled:false,
     ),
@@ -71,6 +80,7 @@ class DevicesServiceImpl implements DevicesService {
       states: const ["On", "Off"],
       voiceCommands: const [],
       voiceCommandsEnabled:false,
+      id: 6,
     ),
   ];
 
@@ -97,7 +107,8 @@ class DevicesServiceImpl implements DevicesService {
   }
 
   @override
-  Future<void> switchDeviceState(DeviceEntity device) {
+  Future<void> switchDeviceState(int deviceId) {
+    var device = devices.firstWhere((element) => element.id == deviceId);
     return Future.delayed(const Duration(milliseconds: 0), () {
       if (device.binaryState && device.states?.length == 2) {
         var index = devices.indexOf(device);
