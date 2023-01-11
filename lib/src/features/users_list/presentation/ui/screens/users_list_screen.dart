@@ -30,7 +30,7 @@ class UsersListScreen extends StatelessWidget {
                       itemCount: state.usersList.length + 1,
                       itemBuilder: (context, index) {
                         if (index == state.usersList.length) {
-                          return const AddTileWidget();
+                          return  AddTileWidget(title: "Add new user",icon: Icon(Icons.add, size: 32,),isUserTile: true,onPressed: (){});
                         }
                         return UserTileWidget(
                             userEntity: state.usersList[index]);

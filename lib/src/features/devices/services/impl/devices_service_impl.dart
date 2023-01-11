@@ -1,4 +1,5 @@
 import '../../domain/device_entity.dart';
+import '../../domain/voice_command_entity.dart';
 import '../api/devices_service.dart';
 
 class DevicesServiceImpl implements DevicesService {
@@ -10,6 +11,8 @@ class DevicesServiceImpl implements DevicesService {
       binaryState: false,
       type: DeviceType.smart_speaker,
       states: const ["On, listening", "Playing music", "Off"],
+      voiceCommands: const [VoiceCommandEntity(name: "Voice command 1"), VoiceCommandEntity(name: "Voice command 2")],
+      voiceCommandsEnabled: true,
     ),
     DeviceEntity(
       name: "Living Window",
@@ -18,6 +21,8 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.window,
       binaryState: true,
       states: const ["Open", "Closed"],
+      voiceCommands: const [],
+      voiceCommandsEnabled:false,
     ),
     DeviceEntity(
       name: "Thermo",
@@ -27,6 +32,8 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.thermostat,
       states: const ["On", "Off"],
       temperature: 20,
+      voiceCommands: const [],
+      voiceCommandsEnabled:false,
     ),
   ];
 
@@ -39,6 +46,8 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.smart_speaker,
       binaryState: false,
       states: const ["On, listening", "Playing music", "Off"],
+      voiceCommands: const [],
+      voiceCommandsEnabled:false,
     ),
     DeviceEntity(
       name: "Thermo",
@@ -49,6 +58,8 @@ class DevicesServiceImpl implements DevicesService {
       binaryState: true,
       states: const ["On", "Off"],
       temperature: 20,
+      voiceCommands: const [],
+      voiceCommandsEnabled:false,
     ),
     DeviceEntity(
       name: "Living TV",
@@ -58,6 +69,8 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.smart_tv,
       binaryState: true,
       states: const ["On", "Off"],
+      voiceCommands: const [],
+      voiceCommandsEnabled:false,
     ),
   ];
 
@@ -94,5 +107,22 @@ class DevicesServiceImpl implements DevicesService {
         devices[index] = device;
       }
     });
+  }
+
+  @override
+  List<DeviceEntity> get allDevices => devices;
+
+  @override
+  void addVoiceCommandToDevice(DeviceEntity deviceEntity, VoiceCommandEntity voiceCommand) {
+    deviceEntity.voiceCommands.add(voiceCommand);
+  }
+
+  @override
+  void deleteVoiceCommandFromDevice(DeviceEntity deviceEntity,  VoiceCommandEntity voiceCommandEntity) {
+      devices.forEach((element) {
+        if(element.name==deviceEntity.name){
+          element.voiceCommands.remove(voiceCommandEntity);
+        }
+      });
   }
 }
