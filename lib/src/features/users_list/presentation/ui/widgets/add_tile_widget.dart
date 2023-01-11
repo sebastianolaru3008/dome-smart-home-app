@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddTileWidget extends StatelessWidget {
-  const AddTileWidget({Key? key, required this.title, required this.icon, required this.isUserTile}) : super(key: key);
+  const AddTileWidget({Key? key, required this.title, required this.icon, required this.isUserTile, required this.onPressed}) : super(key: key);
 
   final String title;
   final Icon icon;
   final bool isUserTile;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,8 @@ class AddTileWidget extends StatelessWidget {
                 .read<DashboardBloc>()
                 .add(const DashboardEventShowBars(areBarsShowing: false));
             Navigator.pushNamed(context, Routes.userAdd);
+          }else{
+            onPressed();
           }
         },
         child: DottedBorder(

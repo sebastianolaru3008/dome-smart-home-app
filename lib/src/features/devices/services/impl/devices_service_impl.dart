@@ -11,7 +11,7 @@ class DevicesServiceImpl implements DevicesService {
       binaryState: false,
       type: DeviceType.smart_speaker,
       states: const ["On, listening", "Playing music", "Off"],
-      voiceCommands: [VoiceCommandEntity(name: "Voice command 1"), VoiceCommandEntity(name: "Voice command 2")],
+      voiceCommands: const [VoiceCommandEntity(name: "Voice command 1"), VoiceCommandEntity(name: "Voice command 2")],
       voiceCommandsEnabled: true,
     ),
     DeviceEntity(
@@ -21,7 +21,7 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.window,
       binaryState: true,
       states: const ["Open", "Closed"],
-      voiceCommands: [],
+      voiceCommands: const [],
       voiceCommandsEnabled:false,
     ),
     DeviceEntity(
@@ -32,7 +32,7 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.thermostat,
       states: const ["On", "Off"],
       temperature: 20,
-      voiceCommands: [],
+      voiceCommands: const [],
       voiceCommandsEnabled:false,
     ),
   ];
@@ -46,7 +46,7 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.smart_speaker,
       binaryState: false,
       states: const ["On, listening", "Playing music", "Off"],
-      voiceCommands: [],
+      voiceCommands: const [],
       voiceCommandsEnabled:false,
     ),
     DeviceEntity(
@@ -58,7 +58,7 @@ class DevicesServiceImpl implements DevicesService {
       binaryState: true,
       states: const ["On", "Off"],
       temperature: 20,
-      voiceCommands: [],
+      voiceCommands: const [],
       voiceCommandsEnabled:false,
     ),
     DeviceEntity(
@@ -69,7 +69,7 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.smart_tv,
       binaryState: true,
       states: const ["On", "Off"],
-      voiceCommands: [],
+      voiceCommands: const [],
       voiceCommandsEnabled:false,
     ),
   ];
@@ -114,7 +114,7 @@ class DevicesServiceImpl implements DevicesService {
 
   @override
   void addVoiceCommandToDevice(DeviceEntity deviceEntity, VoiceCommandEntity voiceCommand) {
-
+    deviceEntity.voiceCommands.add(voiceCommand);
   }
 
   @override

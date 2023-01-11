@@ -7,10 +7,12 @@ import 'package:dome_smart_home_app/src/features/devices/services/api/devices_se
 import 'package:dome_smart_home_app/src/features/users_list/presentation/bloc/users_list_bloc.dart';
 import 'package:dome_smart_home_app/src/features/users_list/presentation/ui/widgets/add_tile_widget.dart';
 import 'package:dome_smart_home_app/src/features/users_list/presentation/ui/widgets/user_tile_widget.dart';
+import 'package:dome_smart_home_app/src/features/devices/presentation/ui/widgets/voice_commands_add_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../common/locator/service_locator.dart';
+import '../../../../users_list/presentation/ui/widgets/dialog_widget.dart';
 import '../../../domain/voice_command_entity.dart';
 
 class VoiceCommandsWidget extends StatelessWidget {
@@ -44,9 +46,23 @@ class VoiceCommandsWidget extends StatelessWidget {
                   itemCount: deviceEntity.voiceCommands.length + 1,
                   itemBuilder: (context, index) {
                     if (index == deviceEntity.voiceCommands.length) {
-                      return const AddTileWidget(title: "Add voice command",
-                        icon: Icon(Icons.keyboard_voice, size: 32,),
-                        isUserTile: false,);
+                      return  AddTileWidget(title: "Add voice command",
+                        icon: const Icon(Icons.keyboard_voice, size: 32,),
+                        isUserTile: false,
+                      onPressed: (){
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext childContext) {
+                            return VoiceCommandsAddDialog(
+                              deviceEntity: deviceEntity,
+                            onSave:(name){
+                                print(name);
+                              context.read<VoiceCommandsBloc>()
+                                  .add(AddVoiceCommandEvent(deviceEntity: deviceEntity, voiceCommandEntity: VoiceCommandEntity(name: name)));
+                            });
+                          },
+                        );
+                      });
                     }
                     return VoiceCommandTileWidget(
                       voiceCommandEntity: deviceEntity.voiceCommands[index],
