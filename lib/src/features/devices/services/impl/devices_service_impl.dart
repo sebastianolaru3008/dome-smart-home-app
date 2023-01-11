@@ -1,3 +1,5 @@
+import 'package:dome_smart_home_app/src/features/devices/domain/voice_command_entity.dart';
+
 import '../../domain/device_entity.dart';
 import '../api/devices_service.dart';
 
@@ -12,6 +14,11 @@ class DevicesServiceImpl implements DevicesService {
       states: const ["On, listening", "Playing music", "Off"],
       id: 1,
       timer: 10,
+      voiceCommands: [
+        VoiceCommandEntity(name: "Voice command 1"),
+        VoiceCommandEntity(name: "Voice command 2")
+      ],
+      voiceCommandsEnabled: true,
     ),
     DeviceEntity(
       name: "Living Window",
@@ -20,8 +27,10 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.window,
       binaryState: true,
       states: const ["Open", "Closed"],
-      timer: 60*60,
+      timer: 60 * 60,
       id: 2,
+      voiceCommands: [],
+      voiceCommandsEnabled: false,
     ),
     DeviceEntity(
       name: "Thermo",
@@ -33,6 +42,8 @@ class DevicesServiceImpl implements DevicesService {
       temperature: 20,
       id: 3,
       timer: 5,
+      voiceCommands: [],
+      voiceCommandsEnabled: false,
     ),
   ];
 
@@ -45,6 +56,8 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.smart_speaker,
       binaryState: false,
       states: const ["On, listening", "Playing music", "Off"],
+      voiceCommands: [],
+      voiceCommandsEnabled: false,
       id: 4,
     ),
     DeviceEntity(
@@ -57,6 +70,8 @@ class DevicesServiceImpl implements DevicesService {
       states: const ["On", "Off"],
       temperature: 20,
       id: 5,
+      voiceCommands: [],
+      voiceCommandsEnabled: false,
     ),
     DeviceEntity(
       name: "Living TV",
@@ -66,6 +81,8 @@ class DevicesServiceImpl implements DevicesService {
       type: DeviceType.smart_tv,
       binaryState: true,
       states: const ["On", "Off"],
+      voiceCommands: [],
+      voiceCommandsEnabled: false,
       id: 6,
     ),
   ];
@@ -102,6 +119,25 @@ class DevicesServiceImpl implements DevicesService {
             ? device.states![1]
             : device.states![0];
         devices[index] = device;
+      }
+    });
+  }
+
+  @override
+  List<DeviceEntity> get allDevices => devices;
+
+  @override
+  void addVoiceCommandToDevice(
+      DeviceEntity deviceEntity, VoiceCommandEntity voiceCommand) {
+    deviceEntity.voiceCommands.add(voiceCommand);
+  }
+
+  @override
+  void deleteVoiceCommandFromDevice(
+      DeviceEntity deviceEntity, VoiceCommandEntity voiceCommandEntity) {
+    devices.forEach((element) {
+      if (element.name == deviceEntity.name) {
+        element.voiceCommands.remove(voiceCommandEntity);
       }
     });
   }

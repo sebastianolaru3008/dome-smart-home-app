@@ -1,11 +1,11 @@
 import 'package:dome_smart_home_app/src/features/devices/domain/device_entity.dart';
 import 'package:dome_smart_home_app/src/features/devices/presentation/bloc/devices/devices_bloc.dart';
 import 'package:dome_smart_home_app/src/features/devices/presentation/ui/widgets/timer_dialog.dart';
+import 'package:dome_smart_home_app/src/features/devices/presentation/ui/widgets/voice_commands_widget.dart';
 import 'package:dome_smart_home_app/src/features/users_list/domain/user_entity.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../common/navigation/routes.dart';
 import '../../../../users_list/presentation/ui/widgets/dialog_widget.dart';
 
 class DeviceCard extends StatelessWidget {
@@ -21,7 +21,11 @@ class DeviceCard extends StatelessWidget {
       onTap: () {
         switch (userRole) {
           case Role.parent:
-            Navigator.pushNamed(context, Routes.deviceOverview);
+            //Navigator.pushNamed(context, Routes.deviceOverview);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => VoiceCommandsWidget( deviceEntity: device,)),
+            );
             break;
           case Role.kid:
             _showTimerDialog(context);
