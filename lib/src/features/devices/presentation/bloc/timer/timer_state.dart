@@ -27,4 +27,16 @@ class TimerInitialized extends TimerState {
 
   @override
   int get hashCode => secondsRemaining.hashCode ^ isRunning.hashCode;
+
+  //add copywith
+
+  TimerInitialized copyWith({
+    Map<int, int>? secondsRemaining,
+    Map<int, bool>? isRunning,
+  }) {
+    return TimerInitialized(
+      secondsRemaining: secondsRemaining ?? this.secondsRemaining,
+      isRunning: isRunning ?? this.isRunning,
+    );
+  }
 }

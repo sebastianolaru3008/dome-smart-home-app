@@ -52,7 +52,12 @@ class DevicesBloc extends Bloc<DevicesEvent, DevicesState> {
 
   _switchDeviceState(SwitchDeviceStateEvent event, Emitter<DevicesState> emit) async {
     // emit(DevicesInitial());
-    await devicesService.switchDeviceState(event.device);
+    if(event.deviceId != null) {
+      await devicesService.switchDeviceState(event.deviceId!);
+    }
+    if(event.device != null) {
+      await devicesService.switchDeviceState(event.device!.id);
+    }
     emit(DevicesLoaded(devices: await devicesService.getDevices()));
   }
 }

@@ -1,5 +1,4 @@
 import 'package:dome_smart_home_app/src/features/devices/domain/device_entity.dart';
-import 'package:dome_smart_home_app/src/features/devices/presentation/bloc/devices/devices_bloc.dart';
 import 'package:dome_smart_home_app/src/features/devices/presentation/ui/widgets/timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +19,9 @@ class TimerDialogWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var timerState = context.watch<TimerBloc>().state;
     var timerStarted = false;
+    int timeLeft = 0;
     if (timerState is TimerInitialized) {
+      timeLeft = timerState.secondsRemaining[device.id] ?? 0;
       timerStarted = timerState.isRunning[device.id] ?? false;
     }
     return Dialog(
@@ -59,7 +60,9 @@ class TimerDialogWidget extends StatelessWidget {
               TimerWidget(device: device),
               const Spacer(flex: 2),
               ElevatedButton(
-                onPressed: () => _startStopTimer(device, context, timerStarted),
+                onPressed: (timeLeft > 0)
+                    ? () => _startStopTimer(device, context, timerStarted)
+                    : null,
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(
                     fontSize: 20,
@@ -85,10 +88,8 @@ class TimerDialogWidget extends StatelessWidget {
       DeviceEntity device, BuildContext context, bool timerStarted) {
     if (timerStarted) {
       context.read<TimerBloc>().add(StopTimer(device: device));
-      context.read<DevicesBloc>().add(SwitchDeviceStateEvent(device: device));
     } else {
       context.read<TimerBloc>().add(StartTimer(device: device));
-      context.read<DevicesBloc>().add(SwitchDeviceStateEvent(device: device));
     }
   }
 }

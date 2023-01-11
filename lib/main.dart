@@ -9,16 +9,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() {
   registerServices();
 
-  runApp(MultiBlocProvider(providers: [
-    BlocProvider<TimerBloc>(
-      create: (context) => TimerBloc(),
+  runApp(
+    MultiBlocProvider(
+      providers: [
+
+        BlocProvider<DevicesBloc>(
+          create: (context) => DevicesBloc(
+            devicesService: locator.get<DevicesService>(),
+          )..add(LoadDevices()),
+        ),
+        BlocProvider<TimerBloc>(
+          create: (context) => TimerBloc(context.read<DevicesBloc>()),
+        ),
+      ],
+      child: DomeApp(),
     ),
-    BlocProvider<DevicesBloc>(
-      create: (context) => DevicesBloc(
-        devicesService: locator.get<DevicesService>(),
-      )..add(LoadDevices()),
-    ),
-  ], child: DomeApp()));
+  );
 }
 
 class DomeApp extends StatelessWidget {
