@@ -68,10 +68,16 @@ class TimerDialogWidget extends StatelessWidget {
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.white,
+                  foregroundColor: timerStarted ? Colors.white : Colors.black,
+                  backgroundColor: timerStarted ? Colors.black : Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
+                    side: timerStarted
+                        ? BorderSide.none
+                        : const BorderSide(
+                            color: Colors.black,
+                            width: 2,
+                          ),
                   ),
                   minimumSize: const Size(double.infinity, 50),
                 ),

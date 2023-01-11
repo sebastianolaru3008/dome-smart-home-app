@@ -35,51 +35,54 @@ class _AwayAtHomeWidgetState extends State<AwayAtHomeWidget> {
           const Spacer(),
           const Text('Away', style: TextStyle(fontSize: 20)),
           const Spacer(),
-          AnimatedToggleSwitch<String>.dual(
-            current: isHome ? "Home" : "Away",
-            first: "Away",
-            second: "Home",
-            dif: 50,
-            height: 40,
-            colorBuilder: (current) {
-              if (current == "Away") {
-                return Colors.black;
-              } else {
-                return Colors.white;
-              }
-            },
-            borderColor: Colors.white,
-            borderWidth: 3,
-            indicatorSize: const Size(100, double.infinity),
-            indicatorBorderRadius: BorderRadius.circular(20),
-            indicatorBorder: Border.all(
-              color: Colors.black,
-              width: 3,
-            ),
-            loading: loading,
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black26,
-                spreadRadius: 1,
-                blurRadius: 2,
-                offset: Offset(0, 1.5),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: AnimatedToggleSwitch<String>.dual(
+              current: isHome ? "Home" : "Away",
+              first: "Away",
+              second: "Home",
+              dif: 50,
+              height: 40,
+              colorBuilder: (current) {
+                if (current == "Away") {
+                  return Colors.black;
+                } else {
+                  return Colors.white;
+                }
+              },
+              borderColor: Colors.white,
+              borderWidth: 3,
+              indicatorSize: const Size(100, double.infinity),
+              indicatorBorderRadius: BorderRadius.circular(20),
+              indicatorBorder: Border.all(
+                color: Colors.black,
+                width: 3,
               ),
-            ],
-            onChanged: (current) {
-              log(current.toString());
-              if (current == "Away") {
-                _setAway();
-              } else {
-                _setHome();
-              }
-              return !isHome;
-            },
-            onTap: () {
-              // log(isHome.toString());
+              loading: loading,
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  spreadRadius: 1,
+                  blurRadius: 2,
+                  offset: Offset(0, 1.5),
+                ),
+              ],
+              onChanged: (current) {
+                log(current.toString());
+                if (current == "Away") {
+                  _setAway();
+                } else {
+                  _setHome();
+                }
+                return !isHome;
+              },
+              onTap: () {
+                // log(isHome.toString());
 
-              _setIsHome(!isHome);
-              // log(isHome.toString());
-            },
+                _setIsHome(!isHome);
+                // log(isHome.toString());
+              },
+            ),
           ),
           const Spacer(),
           const Text('Home', style: TextStyle(fontSize: 20)),

@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:dome_smart_home_app/src/common/widgets/custom_appbar.dart';
 import 'package:dome_smart_home_app/src/features/authenticate/presentation/bloc/authentication_bloc.dart';
+import 'package:dome_smart_home_app/src/features/authenticate/presentation/bloc/authentication_event.dart';
 import 'package:dome_smart_home_app/src/features/authenticate/presentation/bloc/authentication_state.dart';
 import 'package:dome_smart_home_app/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:dome_smart_home_app/src/features/dashboard/presentation/ui/widgets/panic_bottom_sheet.dart';
@@ -66,8 +67,12 @@ class _DashboardUIState extends State<DashboardUI>
           appBar: state.areBarsShowing
               ? buildCustomAppBar(
                   title: "Hi User!",
-                  leading: CircleAvatar(
-                    backgroundImage: AssetImage(widget.userImagePath),
+                  leading: InkWell(
+                    onTap: () =>
+                        context.read<AuthenticationBloc>().add(GoToLoginPage()),
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage(widget.userImagePath),
+                    ),
                   ),
                   actions: [
                     Padding(

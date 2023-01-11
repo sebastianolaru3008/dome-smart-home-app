@@ -1,3 +1,6 @@
+import 'package:dome_smart_home_app/src/features/authenticate/presentation/bloc/authentication_bloc.dart';
+import 'package:dome_smart_home_app/src/features/authenticate/presentation/bloc/authentication_state.dart';
+import 'package:dome_smart_home_app/src/features/users_list/domain/user_entity.dart';
 import 'package:dome_smart_home_app/src/features/users_list/presentation/bloc/users_list_bloc.dart';
 import 'package:dome_smart_home_app/src/features/users_list/presentation/ui/widgets/add_tile_widget.dart';
 import 'package:dome_smart_home_app/src/features/users_list/presentation/ui/widgets/user_tile_widget.dart';
@@ -30,7 +33,19 @@ class UsersListScreen extends StatelessWidget {
                       itemCount: state.usersList.length + 1,
                       itemBuilder: (context, index) {
                         if (index == state.usersList.length) {
-                          return  AddTileWidget(title: "Add new user",icon: Icon(Icons.add, size: 32,),isUserTile: true,onPressed: (){});
+                          if ((context.read<AuthenticationBloc>().state
+                                      as AuthenticationSucceed)
+                                  .user
+                                  .role !=
+                              Role.parent) return const SizedBox();
+                          return AddTileWidget(
+                              title: "Add new user",
+                              icon: Icon(
+                                Icons.add,
+                                size: 32,
+                              ),
+                              isUserTile: true,
+                              onPressed: () {});
                         }
                         return UserTileWidget(
                             userEntity: state.usersList[index]);

@@ -3,18 +3,22 @@ import 'package:equatable/equatable.dart';
 
 abstract class AuthenticationEvent extends Equatable {
   const AuthenticationEvent();
+
   @override
   List<Object?> get props => [];
 }
 
 class RegisterButtonPressed extends AuthenticationEvent {}
+
 class AuthenticateUser extends AuthenticationEvent {
-  const AuthenticateUser({required this.name, required this.email, required this.password});
+  const AuthenticateUser(
+      {required this.name, required this.email, required this.password});
 
   final String name;
   final String email;
   final String password;
 }
+
 class LoginEvent extends AuthenticationEvent {
   const LoginEvent({required this.email, required this.password});
 
@@ -28,6 +32,7 @@ class LoginUser extends AuthenticationEvent {
   final UserEntity user;
   final bool failure;
 }
+
 class GoToLoginPage extends AuthenticationEvent {}
 
 class SetIsHomeEvent extends AuthenticationEvent {

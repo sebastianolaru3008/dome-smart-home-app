@@ -29,8 +29,9 @@ class DevicesList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         role == Role.parent
-            ? SizedBox(
+            ? Container(
                 height: 50,
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: AwayAtHomeWidget(
                     isHome: (context.read<AuthenticationBloc>().state
                             as AuthenticationSucceed)
