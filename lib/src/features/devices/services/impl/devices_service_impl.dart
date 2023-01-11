@@ -32,6 +32,7 @@ class DevicesServiceImpl implements DevicesService {
       states: const ["On", "Off"],
       temperature: 20,
       id: 3,
+      timer: 5,
     ),
   ];
 
@@ -92,7 +93,8 @@ class DevicesServiceImpl implements DevicesService {
   }
 
   @override
-  Future<void> switchDeviceState(DeviceEntity device) {
+  Future<void> switchDeviceState(int deviceId) {
+    var device = devices.firstWhere((element) => element.id == deviceId);
     return Future.delayed(const Duration(milliseconds: 0), () {
       if (device.binaryState && device.states?.length == 2) {
         var index = devices.indexOf(device);
